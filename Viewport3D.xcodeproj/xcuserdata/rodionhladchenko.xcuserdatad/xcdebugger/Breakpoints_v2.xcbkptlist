@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "047E4227-F595-4CD3-9D28-4F55B3C75361"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "78F7BC72-FB1A-4433-8C5F-F7E000FB4EC8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Viewport3D/Views/MetalScene/Renderer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "init(metalView:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "78F7BC72-FB1A-4433-8C5F-F7E000FB4EC8 - 48e62b2b74fa4cc6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Viewport3D.Renderer.init(metalView: __C.MTKView) -&gt; Viewport3D.Renderer"
+                  moduleName = "Viewport3D"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my%20repos/MetalKitTutorials/Viewport3D/Viewport3D/Views/MetalScene/Renderer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "220">
+               </Location>
+               <Location
+                  uuid = "78F7BC72-FB1A-4433-8C5F-F7E000FB4EC8 - 48e62b2b74fa4cc6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Viewport3D.Renderer.init(metalView: __C.MTKView) -&gt; Viewport3D.Renderer"
+                  moduleName = "Viewport3D"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my%20repos/MetalKitTutorials/Viewport3D/Viewport3D/Views/MetalScene/Renderer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "248">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
