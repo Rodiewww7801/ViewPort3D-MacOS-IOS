@@ -12,9 +12,9 @@ class Renderer: NSObject, MTKViewDelegate {
     static private(set) var device: MTLDevice!
     static private(set) var commandQueue: MTLCommandQueue!
     static private(set) var library: MTLLibrary!
-    private var mdlMesh: MDLMesh!
     private var mesh: MTKMesh!
     private var vertexBuffer: MTLBuffer!
+    private var pipelineDescriptor: MTLRenderPipelineDescriptor!
     private var pipelineState: MTLRenderPipelineState!
     private let metalView: MTKView
     
@@ -36,6 +36,8 @@ class Renderer: NSObject, MTKViewDelegate {
         metalView.delegate = self
         metalView.clearColor = MTLClearColorMake(1, 0, 1, 1)
         
+        createLibrary()
+        createPipelineDescriptor()
         createCubeMesh()
         createPipelineState()
     }
@@ -48,7 +50,6 @@ class Renderer: NSObject, MTKViewDelegate {
                               inwardNormals: false,
                               geometryType: .triangles,
                               allocator: allocator)
-        self.mdlMesh = mdlMesh
         
         do {
             self.mesh = try MTKMesh(mesh: mdlMesh, device: Renderer.device)
@@ -57,23 +58,28 @@ class Renderer: NSObject, MTKViewDelegate {
         }
         
         vertexBuffer = mesh.vertexBuffers[0].buffer
+        //set vertex descriptor of model
+        pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mdlMesh.vertexDescriptor)
     }
     
-    private func createPipelineState() {
+    private func createLibrary() {
         //create library
         let library = Renderer.device.makeDefaultLibrary()
         Renderer.library = library
-        let vertexFunction = library?.makeFunction(name: "vertex_main")
-        let fragmentFunction = library?.makeFunction(name: "fragment_main")
+    }
+    
+    private func createPipelineDescriptor() {
+        let vertexFunction = Renderer.library.makeFunction(name: "vertex_main")
+        let fragmentFunction = Renderer.library.makeFunction(name: "fragment_main")
         
         //create pipeline descriptor
-        let pipelineDescriptor = MTLRenderPipelineDescriptor()
+        self.pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.vertexFunction = vertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
         pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
-        //set vertex descriptor of model
-        pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mdlMesh.vertexDescriptor)
-        
+    }
+    
+    private func createPipelineState() {
         //create pipeline state
         do {
             self.pipelineState = try Renderer.device.makeRenderPipelineState(descriptor: pipelineDescriptor)
