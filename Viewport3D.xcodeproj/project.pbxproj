@@ -7,19 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F85AA9A129E308D8009711EA /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9A029E308D8009711EA /* Renderer.swift */; };
+		F85AA9A529E309B6009711EA /* MetalViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9A429E309B6009711EA /* MetalViewRepresentable.swift */; };
+		F85AA9A729E30C1B009711EA /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9A629E30C1B009711EA /* MetalView.swift */; };
 		F86ED98A29E2FC2E000D9680 /* Viewport3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86ED98929E2FC2E000D9680 /* Viewport3DApp.swift */; };
 		F86ED98C29E2FC2E000D9680 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86ED98B29E2FC2E000D9680 /* ContentView.swift */; };
 		F86ED98E29E2FC2F000D9680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F86ED98D29E2FC2F000D9680 /* Assets.xcassets */; };
-		F86ED99229E2FC2F000D9680 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F86ED99129E2FC2F000D9680 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F85AA99F29E3028C009711EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F85AA9A029E308D8009711EA /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		F85AA9A429E309B6009711EA /* MetalViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewRepresentable.swift; sourceTree = "<group>"; };
+		F85AA9A629E30C1B009711EA /* MetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
 		F86ED98629E2FC2E000D9680 /* Viewport3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viewport3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F86ED98929E2FC2E000D9680 /* Viewport3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Viewport3DApp.swift; sourceTree = "<group>"; };
 		F86ED98B29E2FC2E000D9680 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F86ED98D29E2FC2F000D9680 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F86ED98F29E2FC2F000D9680 /* Viewport3D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Viewport3D.entitlements; sourceTree = "<group>"; };
-		F86ED99129E2FC2F000D9680 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +38,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F85AA9A829E30C74009711EA /* MetalScene */ = {
+			isa = PBXGroup;
+			children = (
+				F85AA9A629E30C1B009711EA /* MetalView.swift */,
+				F85AA9A429E309B6009711EA /* MetalViewRepresentable.swift */,
+				F85AA9A029E308D8009711EA /* Renderer.swift */,
+			);
+			path = MetalScene;
+			sourceTree = "<group>";
+		};
 		F86ED97D29E2FC2E000D9680 = {
 			isa = PBXGroup;
 			children = (
@@ -52,21 +67,30 @@
 		F86ED98829E2FC2E000D9680 /* Viewport3D */ = {
 			isa = PBXGroup;
 			children = (
-				F86ED98929E2FC2E000D9680 /* Viewport3DApp.swift */,
-				F86ED98B29E2FC2E000D9680 /* ContentView.swift */,
-				F86ED98D29E2FC2F000D9680 /* Assets.xcassets */,
-				F86ED98F29E2FC2F000D9680 /* Viewport3D.entitlements */,
-				F86ED99029E2FC2F000D9680 /* Preview Content */,
+				F86ED99829E300A4000D9680 /* Application */,
+				F86ED99929E300B9000D9680 /* Views */,
 			);
 			path = Viewport3D;
 			sourceTree = "<group>";
 		};
-		F86ED99029E2FC2F000D9680 /* Preview Content */ = {
+		F86ED99829E300A4000D9680 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				F86ED99129E2FC2F000D9680 /* Preview Assets.xcassets */,
+				F85AA99F29E3028C009711EA /* Info.plist */,
+				F86ED98929E2FC2E000D9680 /* Viewport3DApp.swift */,
+				F86ED98D29E2FC2F000D9680 /* Assets.xcassets */,
+				F86ED98F29E2FC2F000D9680 /* Viewport3D.entitlements */,
 			);
-			path = "Preview Content";
+			path = Application;
+			sourceTree = "<group>";
+		};
+		F86ED99929E300B9000D9680 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F85AA9A829E30C74009711EA /* MetalScene */,
+				F86ED98B29E2FC2E000D9680 /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +151,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F86ED99229E2FC2F000D9680 /* Preview Assets.xcassets in Resources */,
 				F86ED98E29E2FC2F000D9680 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,7 +162,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F85AA9A529E309B6009711EA /* MetalViewRepresentable.swift in Sources */,
 				F86ED98C29E2FC2E000D9680 /* ContentView.swift in Sources */,
+				F85AA9A729E30C1B009711EA /* MetalView.swift in Sources */,
+				F85AA9A129E308D8009711EA /* Renderer.swift in Sources */,
 				F86ED98A29E2FC2E000D9680 /* Viewport3DApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +223,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -249,6 +276,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -261,14 +289,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Viewport3D/Viewport3D.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Viewport3D/Application/Viewport3D.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Viewport3D/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Viewport3D/Application/Preview Content\"";
 				DEVELOPMENT_TEAM = Z9MV89M5M3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Viewport3D/Application/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -299,14 +328,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Viewport3D/Viewport3D.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Viewport3D/Application/Viewport3D.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Viewport3D/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Viewport3D/Application/Preview Content\"";
 				DEVELOPMENT_TEAM = Z9MV89M5M3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Viewport3D/Application/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
