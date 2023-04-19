@@ -8,15 +8,18 @@
 import Foundation
 import MetalKit
 
-class Renderer: NSObject, MTKViewDelegate {
+class Renderer: NSObject {
     static private(set) var device: MTLDevice!
     static private(set) var commandQueue: MTLCommandQueue!
     static private(set) var library: MTLLibrary!
     private var mesh: MTKMesh!
-    private var vertexBuffer: MTLBuffer!
+    private var vertexBuffers: [MTLBuffer] = []
     private var pipelineDescriptor: MTLRenderPipelineDescriptor!
     private var pipelineState: MTLRenderPipelineState!
     private let metalView: MTKView
+    private let resourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
+    private var timer: Float = 0.0
+    
     
     init(metalView: MTKView) {
         guard
@@ -34,12 +37,32 @@ class Renderer: NSObject, MTKViewDelegate {
         
         metalView.device = Renderer.device
         metalView.delegate = self
-        metalView.clearColor = MTLClearColorMake(1, 0, 1, 1)
+        metalView.clearColor = MTLClearColorMake(255, 255, 255, 1)
         
+        //renderModelLogicSetup()
+        renderQuadLogicSetup()
+    }
+    
+    private func renderQuadLogicSetup() {
         createLibrary()
         createPipelineDescriptor()
-        createCubeMesh()
+        createQuad()
+        pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.cubeDefaultLayout
         createPipelineState()
+    }
+    
+    private func renderModelLogicSetup() {
+        createLibrary()
+        createPipelineDescriptor()
+        importObj()
+        createPipelineState()
+    }
+    
+    private func createQuad() {
+        let quad = Quad(device: Renderer.device, scale: 0.5)
+        vertexBuffers.append(quad.vertexBuffer)
+        vertexBuffers.append(quad.indexBuffer)
+        vertexBuffers.append(quad.colorBuffer)
     }
     
     private func createCubeMesh() {
@@ -57,7 +80,7 @@ class Renderer: NSObject, MTKViewDelegate {
             fatalError("cant initilize MTKMesh")
         }
         
-        vertexBuffer = mesh.vertexBuffers[0].buffer
+        vertexBuffers[0] = mesh.vertexBuffers[0].buffer
         //set vertex descriptor of model
         pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(mdlMesh.vertexDescriptor)
     }
@@ -88,6 +111,40 @@ class Renderer: NSObject, MTKViewDelegate {
         }
     }
     
+    private func importObj() {
+        guard let assetURL = Bundle.main.url(forResource: resourceName, withExtension: "obj") else {
+            fatalError("Cant find resource \(resourceName).obj")
+        }
+        
+        let vertexDescriptor = MTLVertexDescriptor()
+        vertexDescriptor.attributes[0].format = .float3
+        vertexDescriptor.attributes[0].offset = 0
+        vertexDescriptor.attributes[0].bufferIndex = 0
+        vertexDescriptor.layouts[0].stride = MemoryLayout<SIMD3<Float>>.stride
+        
+        vertexDescriptor.attributes[1].format = .float3
+        vertexDescriptor.attributes[1].offset = 0
+        vertexDescriptor.attributes[1].bufferIndex = 1
+        vertexDescriptor.layouts[1].stride = MemoryLayout<SIMD3<Float>>.stride
+        
+        let meshDescriptor = MTKModelIOVertexDescriptorFromMetal(vertexDescriptor)
+        (meshDescriptor.attributes[0] as? MDLVertexAttribute)?.name = MDLVertexAttributePosition
+        
+        let allocator = MTKMeshBufferAllocator(device: Renderer.device)
+        let asset = MDLAsset(url: assetURL,
+                               vertexDescriptor: meshDescriptor,
+                               bufferAllocator: allocator)
+        
+        if let mdlMesh = asset.childObjects(of: MDLMesh.self).first as? MDLMesh {
+            self.mesh = try? MTKMesh(mesh: mdlMesh, device: Renderer.device)
+        }
+        
+        vertexBuffers[0] = self.mesh.vertexBuffers[0].buffer
+        pipelineDescriptor.vertexDescriptor = MTKMetalVertexDescriptorFromModelIO(meshDescriptor)
+    }
+}
+
+extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         print("drawableSizeWillChange")
     }
@@ -103,17 +160,10 @@ class Renderer: NSObject, MTKViewDelegate {
         }
         
         renderEncoder.setRenderPipelineState(pipelineState)
-        renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        renderEncoder.setTriangleFillMode(.lines)
-        for submesh in mesh.submeshes {
-            renderEncoder.drawIndexedPrimitives(
-                type: .triangle,
-                indexCount: submesh.indexCount,
-                indexType: submesh.indexType,
-                indexBuffer: submesh.indexBuffer.buffer,
-                indexBufferOffset: submesh.indexBuffer.offset)
-        }
         
+        //renderObjectModel(renderEncoder: renderEncoder)
+        //setupTimer(renderEncoder: renderEncoder)
+        renderQuad(renderEncoder: renderEncoder)
         
         renderEncoder.endEncoding()
         
@@ -124,5 +174,44 @@ class Renderer: NSObject, MTKViewDelegate {
         
         commandBuffer.present(drawable)
         commandBuffer.commit()
+    }
+    
+    private func setupTimer(renderEncoder: MTLRenderCommandEncoder) {
+        timer += 0.05
+        var currentTime = sin(timer)
+        renderEncoder.setVertexBytes(
+            &currentTime,
+            length: MemoryLayout<Float>.stride,
+            index: 11)
+    }
+    
+    private func renderQuad(renderEncoder: MTLRenderCommandEncoder) {
+        renderEncoder.setVertexBuffer(vertexBuffers[0], offset: 0, index: 0)
+        //renderEncoder.setVertexBuffer(vertexBuffers[1], offset: 0, index: 1)
+        renderEncoder.setVertexBuffer(vertexBuffers[2], offset: 0, index: 1)
+        
+        renderEncoder.drawIndexedPrimitives(
+            type: .triangle,
+            indexCount: 6,
+            indexType: .uint16,
+            indexBuffer: vertexBuffers[1],
+            indexBufferOffset: 0)
+        
+        
+    }
+    
+    private func renderObjectModel(renderEncoder: MTLRenderCommandEncoder) {
+        renderEncoder.setVertexBuffer(vertexBuffers[0], offset: 0, index: 0)
+        renderEncoder.setVertexBuffer(vertexBuffers[0], offset: 0, index: 1)
+        renderEncoder.setTriangleFillMode(.lines)
+        for submesh in mesh.submeshes {
+            renderEncoder.drawIndexedPrimitives(
+                type: .triangle,
+                indexCount: submesh.indexCount,
+                indexType: submesh.indexType,
+                indexBuffer: submesh.indexBuffer.buffer,
+                indexBufferOffset: submesh.indexBuffer.offset)
+        }
+        
     }
 }
