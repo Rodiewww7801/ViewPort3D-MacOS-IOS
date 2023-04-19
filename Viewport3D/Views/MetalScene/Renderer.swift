@@ -191,7 +191,7 @@ extension Renderer: MTKViewDelegate {
         renderEncoder.setVertexBuffer(vertexBuffers[2], offset: 0, index: 1)
         
         renderEncoder.drawIndexedPrimitives(
-            type: .triangle,
+            type: .point,
             indexCount: 6,
             indexType: .uint16,
             indexBuffer: vertexBuffers[1],
