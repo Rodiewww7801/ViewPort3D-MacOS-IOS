@@ -22,7 +22,7 @@ class Sphere {
         self.radius = radius
         self.scale = scale
         self.poligons = poligons
-        self.circleVertices = Sphere.initCircleVertices(radius: radius, poligons: poligons)
+        self.circleVertices = Sphere.initCircleVertices(radius: radius, poligons: poligons).map({ $0 * scale })
         self.indices = Sphere.getPathIndices(circleVertices: self.circleVertices)
         
         guard let circleVerticesBuffer = device.makeBuffer(
@@ -86,27 +86,3 @@ class Sphere {
         return circleVertices
     }
 }
-
-//private class func initVertices(radius: Float, poligons: Int) -> [simd_float3] {
-//    var sphereVertices: [simd_float3] = []
-//
-//    let centerPosition = simd_float3(0,0,0)
-//    var currentPosition: simd_float3
-//
-//    for i in 0...poligons {
-//        var positionXY: simd_float2 = simd_float2()
-//        let alpha: Float = ((2 * Float.pi) / Float(poligons) ) * Float(i)
-//        positionXY.x = radius * cos(alpha)
-//        positionXY.y = radius * sin(alpha)
-//
-//        currentPosition = simd_float3(positionXY, 0)
-//        sphereVertices.append(currentPosition)
-//
-//        if i != 0{
-//            sphereVertices.append(centerPosition)
-//            sphereVertices.append(currentPosition)
-//        }
-//    }
-//
-//    return sphereVertices
-//}

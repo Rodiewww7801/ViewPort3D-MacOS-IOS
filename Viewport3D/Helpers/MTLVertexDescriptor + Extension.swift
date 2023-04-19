@@ -22,4 +22,14 @@ extension MTLVertexDescriptor {
         vertexDescriptor.layouts[1].stride = MemoryLayout<simd_float3>.stride
         return vertexDescriptor
     }
+    
+    static var sphereDefaultLayout: MTLVertexDescriptor {
+        let vertexDescriptor = MTLVertexDescriptor()
+        vertexDescriptor.attributes[0].format = .float3
+        vertexDescriptor.attributes[0].offset = 0
+        vertexDescriptor.attributes[0].bufferIndex = 0
+        vertexDescriptor.layouts[0].stride = MemoryLayout<simd_float3>.stride
+        
+        return vertexDescriptor
+    }
 }

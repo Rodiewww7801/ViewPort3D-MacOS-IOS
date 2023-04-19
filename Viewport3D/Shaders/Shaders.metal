@@ -87,14 +87,11 @@ struct VertexOut {
     float pointSize [[point_size]];
 };
 
-vertex VertexOut vertex_main(
-                             constant float3 *vertices [[buffer(0)]],
-                             constant ushort *indecies [[buffer(1)]],
-                             constant float &timer [[buffer(11)]],
-                             uint vertexID [[vertex_id]])
+vertex VertexOut vertex_main(float3 position [[attribute(0)]] [[stage_in]],
+                             constant float &timer [[buffer(11)]])
 {
     VertexOut vertexOut =  {
-        .position = float4(vertices[indecies[vertexID]], 1),
+        .position = float4(position,1),
         .color = float4(0,0,1,1),
         .pointSize = 20
     };
