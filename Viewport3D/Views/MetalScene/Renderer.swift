@@ -49,7 +49,6 @@ class Renderer: NSObject {
         createLibrary()
         createPipelineDescriptor()
         createSphere()
-        pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.sphereDefaultLayout
         createPipelineState()
     }
     
@@ -178,7 +177,7 @@ extension Renderer: MTKViewDelegate {
         renderEncoder.setRenderPipelineState(pipelineState)
         
         //renderObjectModel(renderEncoder: renderEncoder)
-        //setupTimer(renderEncoder: renderEncoder)
+        setupTimer(renderEncoder: renderEncoder)
         //renderCircle(renderEncoder: renderEncoder)
         //renderQuad(renderEncoder: renderEncoder)
         renderSphere(renderEncoder: renderEncoder)
@@ -212,15 +211,8 @@ extension Renderer: MTKViewDelegate {
     private func renderSphere(renderEncoder: MTLRenderCommandEncoder) {
         guard let sphere = sphere else { return }
         renderEncoder.setVertexBuffer(sphere.circleVerticesBuffer, offset: 0, index: 0)
-        //renderEncoder.setVertexBuffer(sphere.indicesBuffer, offset: 0, index: 1)
-        //renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: sphere.indices.count)
-        
-        renderEncoder.drawIndexedPrimitives(
-            type: .triangle,
-            indexCount: sphere.indices.count,
-            indexType: .uint16,
-            indexBuffer: sphere.indicesBuffer,
-            indexBufferOffset: 0)
+        renderEncoder.setVertexBuffer(sphere.indicesBuffer, offset: 0, index: 1)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: sphere.indices.count)
     }
     
     private func renderQuad(renderEncoder: MTLRenderCommandEncoder) {
