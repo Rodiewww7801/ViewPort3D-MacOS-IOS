@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F817497B29F06AE500EB1AA5 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = F817497A29F06AE500EB1AA5 /* Sphere.swift */; };
 		F85AA9A129E308D8009711EA /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9A029E308D8009711EA /* Renderer.swift */; };
 		F85AA9A529E309B6009711EA /* MetalViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9A429E309B6009711EA /* MetalViewRepresentable.swift */; };
 		F85AA9A729E30C1B009711EA /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9A629E30C1B009711EA /* MetalView.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F817497A29F06AE500EB1AA5 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 		F85AA99F29E3028C009711EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F85AA9A029E308D8009711EA /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		F85AA9A429E309B6009711EA /* MetalViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewRepresentable.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				F8D5358129E60BBA00CCB8D2 /* Quad.swift */,
+				F817497A29F06AE500EB1AA5 /* Sphere.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 			files = (
 				F85AA9D929E35DB5009711EA /* Shaders.metal in Sources */,
 				F8D5358229E60BBA00CCB8D2 /* Quad.swift in Sources */,
+				F817497B29F06AE500EB1AA5 /* Sphere.swift in Sources */,
 				F8D5358829E7580F00CCB8D2 /* MTLVertexDescriptor + Extension.swift in Sources */,
 				F85AA9A529E309B6009711EA /* MetalViewRepresentable.swift in Sources */,
 				F86ED98C29E2FC2E000D9680 /* ContentView.swift in Sources */,

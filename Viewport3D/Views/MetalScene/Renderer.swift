@@ -19,6 +19,7 @@ class Renderer: NSObject {
     private let metalView: MTKView
     private let resourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
     private var timer: Float = 0.0
+    private var sphere: Sphere?
     
     
     init(metalView: MTKView) {
@@ -40,7 +41,15 @@ class Renderer: NSObject {
         metalView.clearColor = MTLClearColorMake(255, 255, 255, 1)
         
         //renderModelLogicSetup()
-        renderQuadLogicSetup()
+        //renderQuadLogicSetup()
+        renderSphereLogicSetup()
+    }
+    
+    private func renderSphereLogicSetup() {
+        createLibrary()
+        createPipelineDescriptor()
+        createSphere()
+        createPipelineState()
     }
     
     private func renderQuadLogicSetup() {
@@ -56,6 +65,12 @@ class Renderer: NSObject {
         createPipelineDescriptor()
         importObj()
         createPipelineState()
+    }
+    
+    private func createSphere() {
+        let sphere = Sphere(device: Renderer.device)
+        self.sphere = sphere
+        print(sphere.indices)
     }
     
     private func createQuad() {
@@ -163,7 +178,9 @@ extension Renderer: MTKViewDelegate {
         
         //renderObjectModel(renderEncoder: renderEncoder)
         //setupTimer(renderEncoder: renderEncoder)
-        renderQuad(renderEncoder: renderEncoder)
+        //renderCircle(renderEncoder: renderEncoder)
+        //renderQuad(renderEncoder: renderEncoder)
+        renderSphere(renderEncoder: renderEncoder)
         
         renderEncoder.endEncoding()
         
@@ -185,6 +202,19 @@ extension Renderer: MTKViewDelegate {
             index: 11)
     }
     
+    private func renderCircle(renderEncoder: MTLRenderCommandEncoder) {
+        var countOfPointsInCircle = 50
+        renderEncoder.setVertexBytes(&countOfPointsInCircle, length: MemoryLayout<Int>.stride, index: 0)
+        renderEncoder.drawPrimitives(type: .lineStrip, vertexStart: 0, vertexCount: 51)
+    }
+    
+    private func renderSphere(renderEncoder: MTLRenderCommandEncoder) {
+        guard let sphere = sphere else { return }
+        renderEncoder.setVertexBuffer(sphere.circleVerticesBuffer, offset: 0, index: 0)
+        renderEncoder.setVertexBuffer(sphere.indicesBuffer, offset: 0, index: 1)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: sphere.indices.count)
+    }
+    
     private func renderQuad(renderEncoder: MTLRenderCommandEncoder) {
         renderEncoder.setVertexBuffer(vertexBuffers[0], offset: 0, index: 0)
         //renderEncoder.setVertexBuffer(vertexBuffers[1], offset: 0, index: 1)
@@ -196,8 +226,6 @@ extension Renderer: MTKViewDelegate {
             indexType: .uint16,
             indexBuffer: vertexBuffers[1],
             indexBufferOffset: 0)
-        
-        
     }
     
     private func renderObjectModel(renderEncoder: MTLRenderCommandEncoder) {
