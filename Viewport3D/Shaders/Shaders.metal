@@ -93,7 +93,7 @@ vertex VertexOut vertex_main(constant float3 *position [[buffer(0)]],
                              uint vertexID [[vertex_id]])
 {
     float3 newPosition = position[indices[vertexID]];
-    newPosition.y += timer;
+    //newPosition.y += timer;
     VertexOut vertexOut =  {
         .position = float4(newPosition, 1),
         .color = float4(0,0,1,1),

@@ -14,7 +14,9 @@ struct MetalView: View {
     
     var body: some View {
         MetalViewRepresentable(metalView: $metalView)
-            .frame(minWidth: 480, minHeight: 480)
+#if os(macOS)
+                .frame(minWidth: 480, minHeight: 480)
+#endif
             .onAppear {
                 self.renderer = Renderer(metalView: metalView)
             }

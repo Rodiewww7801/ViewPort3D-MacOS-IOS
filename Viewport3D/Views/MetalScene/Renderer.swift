@@ -68,7 +68,7 @@ class Renderer: NSObject {
     }
     
     private func createSphere() {
-        let sphere = Sphere(device: Renderer.device)
+        let sphere = Sphere(device: Renderer.device, scale: 0.4)
         self.sphere = sphere
     }
     
@@ -176,7 +176,7 @@ extension Renderer: MTKViewDelegate {
         renderEncoder.setRenderPipelineState(pipelineState)
         
         //renderObjectModel(renderEncoder: renderEncoder)
-        setupTimer(renderEncoder: renderEncoder)
+        //setupTimer(renderEncoder: renderEncoder)
         //renderCircle(renderEncoder: renderEncoder)
         //renderQuad(renderEncoder: renderEncoder)
         renderSphere(renderEncoder: renderEncoder)
