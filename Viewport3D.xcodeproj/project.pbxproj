@@ -27,6 +27,8 @@
 		F86ED98C29E2FC2E000D9680 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86ED98B29E2FC2E000D9680 /* ContentView.swift */; };
 		F86ED98E29E2FC2F000D9680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F86ED98D29E2FC2F000D9680 /* Assets.xcassets */; };
 		F872891A29F6CC9600B70AC4 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872891929F6CC9600B70AC4 /* GridView.swift */; };
+		F872891C29F6E77B00B70AC4 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872891B29F6E77B00B70AC4 /* Triangle.swift */; };
+		F872891E29F6EA2800B70AC4 /* Primitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872891D29F6EA2800B70AC4 /* Primitives.swift */; };
 		F8D5358229E60BBA00CCB8D2 /* Quad.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358129E60BBA00CCB8D2 /* Quad.swift */; };
 		F8D5358829E7580F00CCB8D2 /* MTLVertexDescriptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358729E7580F00CCB8D2 /* MTLVertexDescriptor + Extension.swift */; };
 /* End PBXBuildFile section */
@@ -55,6 +57,8 @@
 		F86ED98D29E2FC2F000D9680 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F86ED98F29E2FC2F000D9680 /* Viewport3D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Viewport3D.entitlements; sourceTree = "<group>"; };
 		F872891929F6CC9600B70AC4 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		F872891B29F6E77B00B70AC4 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		F872891D29F6EA2800B70AC4 /* Primitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Primitives.swift; sourceTree = "<group>"; };
 		F8D5358129E60BBA00CCB8D2 /* Quad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quad.swift; sourceTree = "<group>"; };
 		F8D5358729E7580F00CCB8D2 /* MTLVertexDescriptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLVertexDescriptor + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +124,8 @@
 			children = (
 				F8D5358129E60BBA00CCB8D2 /* Quad.swift */,
 				F817497A29F06AE500EB1AA5 /* Sphere.swift */,
+				F872891B29F6E77B00B70AC4 /* Triangle.swift */,
+				F872891D29F6EA2800B70AC4 /* Primitives.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -276,6 +282,8 @@
 				F85AA9A529E309B6009711EA /* MetalViewRepresentable.swift in Sources */,
 				F86ED98C29E2FC2E000D9680 /* ContentView.swift in Sources */,
 				F85AA9A729E30C1B009711EA /* MetalView.swift in Sources */,
+				F872891E29F6EA2800B70AC4 /* Primitives.swift in Sources */,
+				F872891C29F6E77B00B70AC4 /* Triangle.swift in Sources */,
 				F85AA9A129E308D8009711EA /* Renderer.swift in Sources */,
 				F872891A29F6CC9600B70AC4 /* GridView.swift in Sources */,
 				F86ED98A29E2FC2E000D9680 /* Viewport3DApp.swift in Sources */,

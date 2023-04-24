@@ -19,7 +19,7 @@ class Renderer: NSObject {
     private let metalView: MTKView
     private let resourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
     private var timer: Float = 0.0
-    private var sphere: Sphere?
+    private var primitive: Primitive?
     
     
     init(metalView: MTKView) {
@@ -42,7 +42,15 @@ class Renderer: NSObject {
         
         //renderModelLogicSetup()
         //renderQuadLogicSetup()
-        renderSphereLogicSetup()
+        renderTriangleLogic()
+    }
+    
+    private func renderTriangleLogic() {
+        createLibrary()
+        createPipelineDescriptor()
+        createTriangle()
+        self.pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.sphereDefaultLayout
+        createPipelineState()
     }
     
     private func renderSphereLogicSetup() {
@@ -70,13 +78,18 @@ class Renderer: NSObject {
     
     private func createSphere() {
         let sphere = Sphere(device: Renderer.device, scale: 0.4)
-        self.sphere = sphere
+        self.primitive = sphere
+    }
+    
+    private func createTriangle() {
+        let triangle = Triangle(device: Renderer.device, scale: 0.5)
+        self.primitive = triangle
     }
     
     private func createQuad() {
         let quad = Quad(device: Renderer.device, scale: 0.5)
-        vertexBuffers.append(quad.vertexBuffer)
-        vertexBuffers.append(quad.indexBuffer)
+        vertexBuffers.append(quad.verticesBuffer)
+        vertexBuffers.append(quad.indicesBuffer)
         vertexBuffers.append(quad.colorBuffer)
     }
     
@@ -209,11 +222,11 @@ extension Renderer: MTKViewDelegate {
     }
     
     private func renderSphere(renderEncoder: MTLRenderCommandEncoder) {
-        guard let sphere = sphere else { return }
+        guard let sphere = primitive else { return }
         
-        renderEncoder.setVertexBuffer(sphere.circleVerticesBuffer, offset: 0, index: 0)
+        renderEncoder.setVertexBuffer(sphere.verticesBuffer, offset: 0, index: 0)
         
-        //first sphere
+        //original sphere
         var translation = simd_float3(0,0,0)
         renderEncoder.setVertexBytes(&translation, length: MemoryLayout<simd_float3>.stride, index: 12)
         var color_1 = simd_float4(0.9,0.9,0.9,1)
@@ -226,8 +239,7 @@ extension Renderer: MTKViewDelegate {
             indexBufferOffset: 0)
         
         //second sphere
-        
-        translation = simd_float3(0.15,0.15,0)
+        translation = simd_float3(1/3,-1/3,0)
         renderEncoder.setVertexBytes(&translation, length: MemoryLayout<simd_float3>.stride, index: 12)
         color_1 = simd_float4(0,0,1,1)
         renderEncoder.setFragmentBytes(&color_1, length: MemoryLayout<simd_float4>.stride, index: 0)

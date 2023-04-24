@@ -8,17 +8,18 @@
 import Foundation
 import MetalKit
 
-class Sphere {
+class Sphere: Primitive {
+
     private let radius: Float
     private let scale: Float
     private let poligons: Int
     
     public var circleVertices: [simd_float3] = []
     public var indices: [UInt16] = []
-    public let circleVerticesBuffer: MTLBuffer
-    public let indicesBuffer: MTLBuffer
+    public var verticesBuffer: MTLBuffer
+    public var indicesBuffer: MTLBuffer
     
-    init(device: MTLDevice, radius: Float = 1, scale: Float = 0.8, poligons: Int = 50) {
+    init(device: MTLDevice, radius: Float = 1, scale: Float = 1.0, poligons: Int = 50) {
         self.radius = radius
         self.scale = scale
         self.poligons = poligons
@@ -31,7 +32,7 @@ class Sphere {
             options: []) else {
             fatalError("coudnt create sphere")
         }
-        self.circleVerticesBuffer = circleVerticesBuffer
+        self.verticesBuffer = circleVerticesBuffer
         
         guard let indicesBuffer = device.makeBuffer(
             bytes: &indices,

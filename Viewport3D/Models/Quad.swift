@@ -8,9 +8,10 @@
 import Foundation
 import MetalKit
 
-struct Quad {
-    let vertexBuffer: MTLBuffer
-    let indexBuffer: MTLBuffer
+class Quad: Primitive {
+    var verticesBuffer: MTLBuffer
+    var indicesBuffer: MTLBuffer
+    
     let colorBuffer: MTLBuffer
     
     
@@ -23,7 +24,7 @@ struct Quad {
         else {
             fatalError("Unable to create quad vertex buffer")
         }
-        self.vertexBuffer = vertexBuffer
+        self.verticesBuffer = vertexBuffer
         
         guard let indexBuffer = device.makeBuffer(
             bytes: &indices,
@@ -31,7 +32,7 @@ struct Quad {
             options: []) else {
             fatalError("Unable to create quad index buffer")
         }
-        self.indexBuffer = indexBuffer
+        self.indicesBuffer = indexBuffer
         
         guard let colorsBuffer = device.makeBuffer(
             bytes: &colors,
