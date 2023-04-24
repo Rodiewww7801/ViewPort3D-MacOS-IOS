@@ -70,7 +70,6 @@ class Renderer: NSObject {
     private func createSphere() {
         let sphere = Sphere(device: Renderer.device)
         self.sphere = sphere
-        print(sphere.indices)
     }
     
     private func createQuad() {
