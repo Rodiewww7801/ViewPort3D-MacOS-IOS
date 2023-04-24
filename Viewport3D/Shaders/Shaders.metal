@@ -83,25 +83,24 @@ struct VertexIn {
 
 struct VertexOut {
     float4 position [[position]];
-    float4 color;
+    //float4 color;
     float pointSize [[point_size]];
 };
 
-vertex VertexOut vertex_main(constant float3 *position [[buffer(0)]],
-                             constant ushort *indices [[buffer(1)]],
+vertex VertexOut vertex_main(VertexIn vertexIn [[stage_in]],
                              constant float &timer [[buffer(11)]],
-                             uint vertexID [[vertex_id]])
+                             constant float3 &position [[buffer(12)]])
 {
-    float3 newPosition = position[indices[vertexID]];
+    float3 translation = vertexIn.position.xyz + position;
     //newPosition.y += timer;
     VertexOut vertexOut =  {
-        .position = float4(newPosition, 1),
-        .color = float4(0,0,1,1),
+        .position = float4(translation, 1),
+        //.color = float4(0,0,1,1),
         .pointSize = 20
     };
     return vertexOut;
 }
 
-fragment float4 fragment_main(VertexOut vertexOut [[stage_in]]) {
-    return vertexOut.color;
+fragment float4 fragment_main(constant float4 &colorBuffer [[buffer(0)]]) {
+    return colorBuffer;
 }

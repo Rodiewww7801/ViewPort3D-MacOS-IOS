@@ -49,6 +49,7 @@ class Renderer: NSObject {
         createLibrary()
         createPipelineDescriptor()
         createSphere()
+        self.pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.sphereDefaultLayout
         createPipelineState()
     }
     
@@ -176,7 +177,7 @@ extension Renderer: MTKViewDelegate {
         renderEncoder.setRenderPipelineState(pipelineState)
         
         //renderObjectModel(renderEncoder: renderEncoder)
-        //setupTimer(renderEncoder: renderEncoder)
+        setupTimer(renderEncoder: renderEncoder)
         //renderCircle(renderEncoder: renderEncoder)
         //renderQuad(renderEncoder: renderEncoder)
         renderSphere(renderEncoder: renderEncoder)
@@ -209,9 +210,33 @@ extension Renderer: MTKViewDelegate {
     
     private func renderSphere(renderEncoder: MTLRenderCommandEncoder) {
         guard let sphere = sphere else { return }
+        
         renderEncoder.setVertexBuffer(sphere.circleVerticesBuffer, offset: 0, index: 0)
-        renderEncoder.setVertexBuffer(sphere.indicesBuffer, offset: 0, index: 1)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: sphere.indices.count)
+        
+        //first sphere
+        var translation = simd_float3(0,0,0)
+        renderEncoder.setVertexBytes(&translation, length: MemoryLayout<simd_float3>.stride, index: 12)
+        var color_1 = simd_float4(0.9,0.9,0.9,1)
+        renderEncoder.setFragmentBytes(&color_1, length: MemoryLayout<simd_float4>.stride, index: 0)
+        renderEncoder.drawIndexedPrimitives(
+            type: .triangle,
+            indexCount: sphere.indices.count,
+            indexType: .uint16,
+            indexBuffer: sphere.indicesBuffer,
+            indexBufferOffset: 0)
+        
+        //second sphere
+        
+        translation = simd_float3(0.15,0.15,0)
+        renderEncoder.setVertexBytes(&translation, length: MemoryLayout<simd_float3>.stride, index: 12)
+        color_1 = simd_float4(0,0,1,1)
+        renderEncoder.setFragmentBytes(&color_1, length: MemoryLayout<simd_float4>.stride, index: 0)
+        renderEncoder.drawIndexedPrimitives(
+            type: .triangle,
+            indexCount: sphere.indices.count,
+            indexType: .uint16,
+            indexBuffer: sphere.indicesBuffer,
+            indexBufferOffset: 0)
     }
     
     private func renderQuad(renderEncoder: MTLRenderCommandEncoder) {
