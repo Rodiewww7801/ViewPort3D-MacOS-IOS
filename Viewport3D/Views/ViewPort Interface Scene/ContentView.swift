@@ -15,11 +15,13 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            ZStack(alignment: .leading) {
+            ZStack(alignment: .center) {
                 MetalView()
                     .border(Color(.black), width: 0.5)
                 if showGrid {
                     GridView()
+                        //.frame(maxWidth: .infinity, maxHeight: .infinity)
+                        //.fixedSize()
                 }
                 
                 VStack(alignment: .trailing) {
@@ -36,7 +38,7 @@ struct ContentView: View {
             ZStack(alignment: .top) {
                 HStack {
                     Rectangle()
-                        .foregroundColor(.blue)
+                        .foregroundColor(MultiplatformColor.blue)
                         .frame(width: 20, height: 20)
                     Text("Transformed")
                     

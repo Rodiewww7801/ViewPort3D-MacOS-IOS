@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GridView: View {
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack() {
@@ -27,13 +28,13 @@ struct GridView: View {
                 
                 HStack {
                     Rectangle()
-                        .foregroundColor(Color.blue)
+                        .foregroundColor(Color.black)
                         .frame(width: 1)
                 }
                 
                 VStack {
                     Rectangle()
-                        .foregroundColor(Color.red)
+                        .foregroundColor(Color.black)
                         .frame(height: 1)
                 }
                 

@@ -29,6 +29,7 @@
 		F872891A29F6CC9600B70AC4 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872891929F6CC9600B70AC4 /* GridView.swift */; };
 		F872891C29F6E77B00B70AC4 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872891B29F6E77B00B70AC4 /* Triangle.swift */; };
 		F872891E29F6EA2800B70AC4 /* Primitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872891D29F6EA2800B70AC4 /* Primitives.swift */; };
+		F872892029F6FCBB00B70AC4 /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872891F29F6FCBB00B70AC4 /* Color + Extension.swift */; };
 		F8D5358229E60BBA00CCB8D2 /* Quad.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358129E60BBA00CCB8D2 /* Quad.swift */; };
 		F8D5358829E7580F00CCB8D2 /* MTLVertexDescriptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358729E7580F00CCB8D2 /* MTLVertexDescriptor + Extension.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		F872891929F6CC9600B70AC4 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		F872891B29F6E77B00B70AC4 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		F872891D29F6EA2800B70AC4 /* Primitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Primitives.swift; sourceTree = "<group>"; };
+		F872891F29F6FCBB00B70AC4 /* Color + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + Extension.swift"; sourceTree = "<group>"; };
 		F8D5358129E60BBA00CCB8D2 /* Quad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quad.swift; sourceTree = "<group>"; };
 		F8D5358729E7580F00CCB8D2 /* MTLVertexDescriptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MTLVertexDescriptor + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				F8D5358729E7580F00CCB8D2 /* MTLVertexDescriptor + Extension.swift */,
+				F872891F29F6FCBB00B70AC4 /* Color + Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F85AA9D929E35DB5009711EA /* Shaders.metal in Sources */,
+				F872892029F6FCBB00B70AC4 /* Color + Extension.swift in Sources */,
 				F8D5358229E60BBA00CCB8D2 /* Quad.swift in Sources */,
 				F817497B29F06AE500EB1AA5 /* Sphere.swift in Sources */,
 				F8D5358829E7580F00CCB8D2 /* MTLVertexDescriptor + Extension.swift in Sources */,
