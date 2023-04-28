@@ -89,12 +89,12 @@ struct VertexOut {
 
 vertex VertexOut vertex_main(VertexIn vertexIn [[stage_in]],
                              constant float &timer [[buffer(11)]],
-                             constant float3 &position [[buffer(12)]])
+                             constant float4x4 &position [[buffer(12)]])
 {
-    float3 translation = vertexIn.position.xyz + position;
+    float4 translation = position * vertexIn.position;
     //newPosition.y += timer;
     VertexOut vertexOut =  {
-        .position = float4(translation, 1),
+        .position = translation,
         //.color = float4(0,0,1,1),
         .pointSize = 20
     };

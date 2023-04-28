@@ -62,8 +62,8 @@
             filePath = "Viewport3D/Views/MetalScene/Renderer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "renderQuad(renderEncoder:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -129,6 +129,22 @@
             startingLineNumber = "29"
             endingLineNumber = "29"
             landmarkName = "init(device:radius:scale:poligons:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "636F5513-1BFD-41B1-B3D3-5FFB8D432FA3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Viewport3D/Views/MetalScene/Renderer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "renderSphere(renderEncoder:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
