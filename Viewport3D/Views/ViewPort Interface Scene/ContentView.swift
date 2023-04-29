@@ -20,8 +20,6 @@ struct ContentView: View {
                     .border(Color(.black), width: 0.5)
                 if showGrid {
                     GridView()
-                        //.frame(maxWidth: .infinity, maxHeight: .infinity)
-                        //.fixedSize()
                 }
                 
                 VStack(alignment: .trailing) {

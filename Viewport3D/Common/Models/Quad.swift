@@ -19,7 +19,7 @@ class Quad: Primitive {
         self.vertices = vertices.map { $0 * scale }
         guard let vertexBuffer = device.makeBuffer(
             bytes: &vertices,
-            length: MemoryLayout<Float>.stride * vertices.count,
+            length: MemoryLayout<simd_float3>.stride * vertices.count,
             options: [])
         else {
             fatalError("Unable to create quad vertex buffer")
@@ -52,11 +52,11 @@ class Quad: Primitive {
          1, -1, 0
     ]
     
-    var vertices: [Float] = [
-        -1, 1, 0,
-         1, 1, 0,
-         -1, -1, 0,
-         1, -1, 0
+    var vertices: [simd_float3] = [
+        [-1, 1, 0],
+         [1, 1, 0],
+         [-1, -1, 0],
+         [1, -1, 0]
     ]
     
     var indices: [UInt16] = [

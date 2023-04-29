@@ -38,7 +38,7 @@ struct GridView: View {
                         .frame(height: 1)
                 }
                 
-            }//.frame(width: geometry.size.height, height: 480)
+            }
         }
     
     }
