@@ -7,9 +7,10 @@
 
 import MetalKit
 
-class Model {
+class Model: Transformable {
     let mesh: MTKMesh
     let name: String
+    var transform: Transform
     
     init(device: MTLDevice, name: String) {
         guard let assetURL = Bundle.main.url(forResource: name, withExtension: "obj") else {
@@ -30,6 +31,7 @@ class Model {
         }
         
         self.name = name
+        self.transform = Transform()
     }
     
     func render(encoder: MTLRenderCommandEncoder) {

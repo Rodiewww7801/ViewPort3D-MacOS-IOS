@@ -16,6 +16,8 @@ typealias ViewRepresentable = UIViewRepresentable
 
 struct MetalViewRepresentable: ViewRepresentable {
     @Binding var metalView: MTKView
+    var renderer: Renderer?
+    @ObservedObject var renderOptions: RenderOptions
     
 #if os(macOS)
     func makeNSView(context: Context) -> MTKView {
@@ -36,12 +38,15 @@ struct MetalViewRepresentable: ViewRepresentable {
 #endif
     
     private func updateMetalView() {
-        
+        renderer?.renderOptions  = renderOptions
+        print("[Renderer]: updateMetalView")
     }
 }
 
 struct ContentRepresentable_Previews: PreviewProvider {
     static var previews: some View {
-        MetalView()
+        let renderOptions = RenderOptions()
+        renderOptions.renderChoise = .model
+        return MetalView(renderOptions: renderOptions)
     }
 }

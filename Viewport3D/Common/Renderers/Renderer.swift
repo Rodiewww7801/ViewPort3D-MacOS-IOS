@@ -9,48 +9,52 @@ import Foundation
 import MetalKit
 
 class Renderer: NSObject {
+    
     static private(set) var device: MTLDevice!
     static private(set) var commandQueue: MTLCommandQueue!
     static private(set) var library: MTLLibrary!
     
+    public var renderOptions: RenderOptions
+    
     private var pipelineDescriptor: MTLRenderPipelineDescriptor!
-    private var pipelineState: MTLRenderPipelineState!
+    private var pipelineStateForModel: MTLRenderPipelineState!
+    private var pipelineStateForPrimitive: MTLRenderPipelineState!
     private let metalView: MTKView
     private var uniforms: Uniforms = Uniforms()
-    
+
     private let resourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
     private var timer: Float = 0.0
     private var primitive: Primitive?
     private var model: Model?
     
     
-    init(metalView: MTKView) {
+    init(metalView: MTKView, renderOptions: RenderOptions) {
+        print("[Renderer]: init")
+        
         guard
             let device = MTLCreateSystemDefaultDevice(),
             let commandQueue = device.makeCommandQueue()
         else {
-                fatalError("Coud not support Metal")
-            }
+            fatalError("Coud not support Metal")
+        }
         
         Renderer.device = device
         Renderer.commandQueue = commandQueue
         self.metalView = metalView
-        
+        self.renderOptions = renderOptions
+
         super.init()
         
         metalView.device = Renderer.device
         metalView.delegate = self
         metalView.clearColor = MTLClearColorMake(255, 255, 255, 1)
         
-        let translation = float4x4(translation: [0, 0, 0])
-        let rotation = float4x4(rotation: [0,0,Float(45).degreesToRadians])
-        self.uniforms.modelMatrix = translation
-        self.uniforms.viewMatrix =  float4x4(rotation: [0, Float(90).degreesToRadians, 0]).inverse * float4x4(translation: [-3,0,0]).inverse
+        uniforms.modelMatrix = .identity
+        uniforms.viewMatrix = float4x4(translation: [0, 0, -3]).inverse
+        uniforms.projectionMatrix = .identity
         
         modelLogicSetup()
-//        quadLogicSetup()
-//        triangleLogicSetup()
-//        sphereLogicSetup()
+        quadLogicSetup()
         
         mtkView(metalView, drawableSizeWillChange: metalView.bounds.size)
     }
@@ -60,7 +64,7 @@ class Renderer: NSObject {
         Renderer.library = library
     }
     
-    private func createPipelineDescriptor() {
+    private func createPipelineDescriptorForModel() {
         let vertexFunction = Renderer.library.makeFunction(name: "vertex_main")
         let fragmentFunction = Renderer.library.makeFunction(name: "fragment_main")
         
@@ -70,9 +74,31 @@ class Renderer: NSObject {
         pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
     }
     
-    private func createPipelineState() {
+    private func createPipelineDescriptorForPrimitive() {
+        let vertexFunction = Renderer.library.makeFunction(name: "vertex_primitive")
+        let fragmentFunction = Renderer.library.makeFunction(name: "fragment_main")
+        
+        self.pipelineDescriptor = MTLRenderPipelineDescriptor()
+        pipelineDescriptor.vertexFunction = vertexFunction
+        pipelineDescriptor.fragmentFunction = fragmentFunction
+        pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
+    }
+    
+    private func createPipelineStateForModel() {
+        print("[Renderer]: createPipelineStateForModel")
+        
         do {
-            self.pipelineState = try Renderer.device.makeRenderPipelineState(descriptor: pipelineDescriptor)
+            self.pipelineStateForModel = try Renderer.device.makeRenderPipelineState(descriptor: pipelineDescriptor)
+        } catch {
+            fatalError("\(error)")
+        }
+    }
+    
+    private func createPipelineStateForPrimitive() {
+        print("[Renderer]: createPipelineStateForPrimitive")
+        
+        do {
+            self.pipelineStateForPrimitive = try Renderer.device.makeRenderPipelineState(descriptor: pipelineDescriptor)
         } catch {
             fatalError("\(error)")
         }
@@ -92,25 +118,28 @@ extension Renderer: MTKViewDelegate {
             let currentRednderPassDescriptor = view.currentRenderPassDescriptor,
             let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: currentRednderPassDescriptor)
         else {
-            print("Coudn't render view")
+            print("[Renderer]: Coudn't render view")
             return
         }
         
-        renderEncoder.setRenderPipelineState(pipelineState)
-        
-        
-        setupUniform(renderEncoder: renderEncoder)
-        setupTimer(renderEncoder: renderEncoder)
-       
-        renderObjectModel(renderEncoder: renderEncoder)
-       
-//        renderPrimitive(renderEncoder: renderEncoder)
-        
+        switch renderOptions.renderChoise {
+        case .model:
+            renderEncoder.setRenderPipelineState(pipelineStateForModel)
+            setupTransformForModel()
+            setupUniform(renderEncoder: renderEncoder)
+            setupTimer(renderEncoder: renderEncoder)
+            renderObjectModel(renderEncoder: renderEncoder)
+        case .primitive:
+            renderEncoder.setRenderPipelineState(pipelineStateForPrimitive)
+            renderPrimitive(renderEncoder: renderEncoder)
+        default:
+            break
+        }
         
         renderEncoder.endEncoding()
         
         guard let drawable = view.currentDrawable else {
-            print("Coudn't render view")
+            print("[Renderer]: Coudn't render view")
             return
         }
         
@@ -118,9 +147,18 @@ extension Renderer: MTKViewDelegate {
         commandBuffer.commit()
     }
     
+    private func setupTransformForModel() {
+        guard let model = model else { return }
+        self.timer += 0.05
+        let sinTimer = sin(timer)
+        model.transform.position = [0,0,0]
+        model.transform.rotation = [0, sinTimer + Float(-90).degreesToRadians , 0]
+        uniforms.modelMatrix = model.transform.modelMatrix
+    }
+    
     private func setupFOV() {
         let aspect = Float(self.metalView.bounds.width) / Float(self.metalView.bounds.height)
-        let projectionMatrix = float4x4(projectionFov: Float(45), near: 0.1, far: 100, aspect: aspect)
+        let projectionMatrix = float4x4(projectionFov: Float(70), near: 0.1, far: 100, aspect: aspect)
         uniforms.projectionMatrix = projectionMatrix
     }
     
@@ -135,8 +173,10 @@ extension Renderer: MTKViewDelegate {
     }
     
     private func renderPrimitive(renderEncoder: MTLRenderCommandEncoder) {
-        guard let primitive = primitive else { return }
-        primitive.renderPrimitive(encoder: renderEncoder)
+        //guard let primitive = primitive else { return }
+        renderEncoder.setTriangleFillMode(.fill)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
+        //primitive.renderPrimitive(encoder: renderEncoder)
     }
     
     private func renderObjectModel(renderEncoder: MTLRenderCommandEncoder) {
@@ -150,34 +190,34 @@ extension Renderer: MTKViewDelegate {
 extension Renderer {
     private func triangleLogicSetup() {
         createLibrary()
-        createPipelineDescriptor()
+        createPipelineDescriptorForPrimitive()
         createTriangle()
         self.pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.primitiveDefaultLayout
-        createPipelineState()
+        createPipelineStateForPrimitive()
     }
     
     private func sphereLogicSetup() {
         createLibrary()
-        createPipelineDescriptor()
+        createPipelineDescriptorForPrimitive()
         createSphere()
         self.pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.primitiveDefaultLayout
-        createPipelineState()
+        createPipelineStateForPrimitive()
     }
     
     private func quadLogicSetup() {
         createLibrary()
-        createPipelineDescriptor()
-        createQuad()
-        self.pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.primitiveDefaultLayout
-        createPipelineState()
+        createPipelineDescriptorForPrimitive()
+        //createQuad()
+        //self.pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.primitiveDefaultLayout
+        createPipelineStateForPrimitive()
     }
     
     private func modelLogicSetup() {
         createLibrary()
-        createPipelineDescriptor()
+        createPipelineDescriptorForModel()
         createModel()
         self.pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.modelDefaultLayout
-        createPipelineState()
+        createPipelineStateForModel()
     }
     
     private func createSphere() {

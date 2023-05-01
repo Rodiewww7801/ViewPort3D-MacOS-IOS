@@ -22,7 +22,7 @@
 		F85AA9D429E3167A009711EA /* default-grey.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F85AA9C929E3167A009711EA /* default-grey.jpg */; };
 		F85AA9D529E3167A009711EA /* face_c.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F85AA9CA29E3167A009711EA /* face_c.jpg */; };
 		F85AA9D629E3167A009711EA /* body_lili.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F85AA9CB29E3167A009711EA /* body_lili.jpg */; };
-		F85AA9D929E35DB5009711EA /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9D829E35DB5009711EA /* Shaders.metal */; };
+		F85AA9D929E35DB5009711EA /* Vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9D829E35DB5009711EA /* Vertex.metal */; };
 		F86ED98A29E2FC2E000D9680 /* Viewport3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86ED98929E2FC2E000D9680 /* Viewport3DApp.swift */; };
 		F86ED98C29E2FC2E000D9680 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86ED98B29E2FC2E000D9680 /* ContentView.swift */; };
 		F86ED98E29E2FC2F000D9680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F86ED98D29E2FC2F000D9680 /* Assets.xcassets */; };
@@ -33,6 +33,9 @@
 		F87C9DD329FC791D006ED0DE /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87C9DD229FC791D006ED0DE /* MathLibrary.swift */; };
 		F87C9DD529FD1DE3006ED0DE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87C9DD429FD1DE3006ED0DE /* Model.swift */; };
 		F87C9DDA29FF318A006ED0DE /* Common.h in Sources */ = {isa = PBXBuildFile; fileRef = F87C9DD929FF0D08006ED0DE /* Common.h */; };
+		F89F10B029FFC86800932551 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89F10AF29FFC86800932551 /* Transform.swift */; };
+		F89F10B229FFE7A400932551 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B129FFE7A400932551 /* Options.swift */; };
+		F89F10B429FFE92B00932551 /* Fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B329FFE92B00932551 /* Fragment.metal */; };
 		F8D5358229E60BBA00CCB8D2 /* Quad.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358129E60BBA00CCB8D2 /* Quad.swift */; };
 		F8D5358829E7580F00CCB8D2 /* VertexDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358729E7580F00CCB8D2 /* VertexDescriptor.swift */; };
 /* End PBXBuildFile section */
@@ -54,7 +57,7 @@
 		F85AA9C929E3167A009711EA /* default-grey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "default-grey.jpg"; sourceTree = "<group>"; };
 		F85AA9CA29E3167A009711EA /* face_c.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face_c.jpg; sourceTree = "<group>"; };
 		F85AA9CB29E3167A009711EA /* body_lili.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = body_lili.jpg; sourceTree = "<group>"; };
-		F85AA9D829E35DB5009711EA /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		F85AA9D829E35DB5009711EA /* Vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Vertex.metal; sourceTree = "<group>"; };
 		F86ED98629E2FC2E000D9680 /* Viewport3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viewport3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F86ED98929E2FC2E000D9680 /* Viewport3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Viewport3DApp.swift; sourceTree = "<group>"; };
 		F86ED98B29E2FC2E000D9680 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +70,9 @@
 		F87C9DD229FC791D006ED0DE /* MathLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
 		F87C9DD429FD1DE3006ED0DE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		F87C9DD929FF0D08006ED0DE /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Common.h; path = Viewport3D/Common/Common.h; sourceTree = SOURCE_ROOT; };
+		F89F10AF29FFC86800932551 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
+		F89F10B129FFE7A400932551 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		F89F10B329FFE92B00932551 /* Fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fragment.metal; sourceTree = "<group>"; };
 		F8D5358129E60BBA00CCB8D2 /* Quad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quad.swift; sourceTree = "<group>"; };
 		F8D5358729E7580F00CCB8D2 /* VertexDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexDescriptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +93,7 @@
 			children = (
 				F86ED98B29E2FC2E000D9680 /* ContentView.swift */,
 				F872891929F6CC9600B70AC4 /* GridView.swift */,
+				F89F10B129FFE7A400932551 /* Options.swift */,
 			);
 			path = "ViewPort Interface Scene";
 			sourceTree = "<group>";
@@ -134,6 +141,7 @@
 				F817497A29F06AE500EB1AA5 /* Sphere.swift */,
 				F872891D29F6EA2800B70AC4 /* Primitives.swift */,
 				F87C9DD429FD1DE3006ED0DE /* Model.swift */,
+				F89F10AF29FFC86800932551 /* Transform.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -217,7 +225,8 @@
 		F8D5358529E60F4700CCB8D2 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				F85AA9D829E35DB5009711EA /* Shaders.metal */,
+				F85AA9D829E35DB5009711EA /* Vertex.metal */,
+				F89F10B329FFE92B00932551 /* Fragment.metal */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -313,11 +322,14 @@
 			files = (
 				F87C9DDA29FF318A006ED0DE /* Common.h in Sources */,
 				F87C9DD529FD1DE3006ED0DE /* Model.swift in Sources */,
-				F85AA9D929E35DB5009711EA /* Shaders.metal in Sources */,
+				F85AA9D929E35DB5009711EA /* Vertex.metal in Sources */,
 				F87C9DD329FC791D006ED0DE /* MathLibrary.swift in Sources */,
+				F89F10B229FFE7A400932551 /* Options.swift in Sources */,
 				F872892029F6FCBB00B70AC4 /* Color + Extension.swift in Sources */,
 				F8D5358229E60BBA00CCB8D2 /* Quad.swift in Sources */,
+				F89F10B029FFC86800932551 /* Transform.swift in Sources */,
 				F817497B29F06AE500EB1AA5 /* Sphere.swift in Sources */,
+				F89F10B429FFE92B00932551 /* Fragment.metal in Sources */,
 				F8D5358829E7580F00CCB8D2 /* VertexDescriptor.swift in Sources */,
 				F85AA9A529E309B6009711EA /* MetalViewRepresentable.swift in Sources */,
 				F86ED98C29E2FC2E000D9680 /* ContentView.swift in Sources */,
