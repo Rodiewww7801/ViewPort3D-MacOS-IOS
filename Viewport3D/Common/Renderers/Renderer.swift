@@ -16,6 +16,7 @@ class Renderer: NSObject {
     private var pipelineDescriptor: MTLRenderPipelineDescriptor!
     private var pipelineState: MTLRenderPipelineState!
     private let metalView: MTKView
+    private var uniforms: Uniforms = Uniforms()
     
     private let resourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
     private var timer: Float = 0.0
@@ -41,10 +42,17 @@ class Renderer: NSObject {
         metalView.delegate = self
         metalView.clearColor = MTLClearColorMake(255, 255, 255, 1)
         
+        let translation = float4x4(translation: [0, 0, 0])
+        let rotation = float4x4(rotation: [0,0,Float(45).degreesToRadians])
+        self.uniforms.modelMatrix = translation
+        self.uniforms.viewMatrix =  float4x4(rotation: [0, Float(90).degreesToRadians, 0]).inverse * float4x4(translation: [-3,0,0]).inverse
+        
         modelLogicSetup()
 //        quadLogicSetup()
 //        triangleLogicSetup()
 //        sphereLogicSetup()
+        
+        mtkView(metalView, drawableSizeWillChange: metalView.bounds.size)
     }
     
     private func createLibrary() {
@@ -75,7 +83,7 @@ class Renderer: NSObject {
 
 extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        print("drawableSizeWillChange")
+        setupFOV()
     }
     
     func draw(in view: MTKView) {
@@ -90,9 +98,14 @@ extension Renderer: MTKViewDelegate {
         
         renderEncoder.setRenderPipelineState(pipelineState)
         
+        
+        setupUniform(renderEncoder: renderEncoder)
+        setupTimer(renderEncoder: renderEncoder)
+       
         renderObjectModel(renderEncoder: renderEncoder)
-//        setupTimer(renderEncoder: renderEncoder)
+       
 //        renderPrimitive(renderEncoder: renderEncoder)
+        
         
         renderEncoder.endEncoding()
         
@@ -105,13 +118,20 @@ extension Renderer: MTKViewDelegate {
         commandBuffer.commit()
     }
     
+    private func setupFOV() {
+        let aspect = Float(self.metalView.bounds.width) / Float(self.metalView.bounds.height)
+        let projectionMatrix = float4x4(projectionFov: Float(45), near: 0.1, far: 100, aspect: aspect)
+        uniforms.projectionMatrix = projectionMatrix
+    }
+    
     private func setupTimer(renderEncoder: MTLRenderCommandEncoder) {
-        timer += 0.05
-        var currentTime = sin(timer)
-        renderEncoder.setVertexBytes(
-            &currentTime,
-            length: MemoryLayout<Float>.stride,
-            index: 11)
+        timer += 0.005
+        let currentTime = sin(timer)
+        self.uniforms.modelMatrix = float4x4(rotation: [0, currentTime, 0])
+    }
+    
+    private func setupUniform(renderEncoder: MTLRenderCommandEncoder) {
+        renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 1)
     }
     
     private func renderPrimitive(renderEncoder: MTLRenderCommandEncoder) {
