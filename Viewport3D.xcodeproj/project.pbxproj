@@ -36,6 +36,7 @@
 		F89F10B029FFC86800932551 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89F10AF29FFC86800932551 /* Transform.swift */; };
 		F89F10B229FFE7A400932551 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B129FFE7A400932551 /* Options.swift */; };
 		F89F10B429FFE92B00932551 /* Fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B329FFE92B00932551 /* Fragment.metal */; };
+		F89F10B72A004F9B00932551 /* BufferIndices + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B62A004F9B00932551 /* BufferIndices + Extension.swift */; };
 		F8D5358229E60BBA00CCB8D2 /* Quad.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358129E60BBA00CCB8D2 /* Quad.swift */; };
 		F8D5358829E7580F00CCB8D2 /* VertexDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358729E7580F00CCB8D2 /* VertexDescriptor.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +74,8 @@
 		F89F10AF29FFC86800932551 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		F89F10B129FFE7A400932551 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		F89F10B329FFE92B00932551 /* Fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fragment.metal; sourceTree = "<group>"; };
+		F89F10B52A003F3D00932551 /* ShaderDefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderDefs.h; sourceTree = "<group>"; };
+		F89F10B62A004F9B00932551 /* BufferIndices + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BufferIndices + Extension.swift"; sourceTree = "<group>"; };
 		F8D5358129E60BBA00CCB8D2 /* Quad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quad.swift; sourceTree = "<group>"; };
 		F8D5358729E7580F00CCB8D2 /* VertexDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexDescriptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,14 +91,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F8200FF029F6CC38006D0F94 /* ViewPort Interface Scene */ = {
+		F8200FF029F6CC38006D0F94 /* Viewport Interface Scene */ = {
 			isa = PBXGroup;
 			children = (
 				F86ED98B29E2FC2E000D9680 /* ContentView.swift */,
 				F872891929F6CC9600B70AC4 /* GridView.swift */,
 				F89F10B129FFE7A400932551 /* Options.swift */,
 			);
-			path = "ViewPort Interface Scene";
+			path = "Viewport Interface Scene";
 			sourceTree = "<group>";
 		};
 		F85AA9A829E30C74009711EA /* MetalScene */ = {
@@ -165,9 +168,9 @@
 		F86ED98829E2FC2E000D9680 /* Viewport3D */ = {
 			isa = PBXGroup;
 			children = (
-				F87C9DD729FD24B9006ED0DE /* Common */,
 				F86ED99829E300A4000D9680 /* Application */,
 				F85AA9A929E3160E009711EA /* Shared Data */,
+				F87C9DD729FD24B9006ED0DE /* Common */,
 				F86ED99929E300B9000D9680 /* Views */,
 			);
 			path = Viewport3D;
@@ -188,7 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				F87C9DD629FD1F0D006ED0DE /* Helper + Extension */,
-				F8200FF029F6CC38006D0F94 /* ViewPort Interface Scene */,
+				F8200FF029F6CC38006D0F94 /* Viewport Interface Scene */,
 				F85AA9A829E30C74009711EA /* MetalScene */,
 			);
 			path = Views;
@@ -227,6 +230,7 @@
 			children = (
 				F85AA9D829E35DB5009711EA /* Vertex.metal */,
 				F89F10B329FFE92B00932551 /* Fragment.metal */,
+				F89F10B52A003F3D00932551 /* ShaderDefs.h */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -236,6 +240,7 @@
 			children = (
 				F8D5358729E7580F00CCB8D2 /* VertexDescriptor.swift */,
 				F87C9DD229FC791D006ED0DE /* MathLibrary.swift */,
+				F89F10B62A004F9B00932551 /* BufferIndices + Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -335,6 +340,7 @@
 				F86ED98C29E2FC2E000D9680 /* ContentView.swift in Sources */,
 				F85AA9A729E30C1B009711EA /* MetalView.swift in Sources */,
 				F872891E29F6EA2800B70AC4 /* Primitives.swift in Sources */,
+				F89F10B72A004F9B00932551 /* BufferIndices + Extension.swift in Sources */,
 				F872891C29F6E77B00B70AC4 /* Triangle.swift in Sources */,
 				F85AA9A129E308D8009711EA /* Renderer.swift in Sources */,
 				F872891A29F6CC9600B70AC4 /* GridView.swift in Sources */,

@@ -16,4 +16,15 @@ typedef struct {
     matrix_float4x4 projectionMatrix;
 } Uniforms;
 
+typedef struct {
+    uint width;
+    uint height;
+} ScreenParameters;
+
+typedef enum {
+    VertexBuffer = 0,
+    UniformsBuffer = 11,
+    ParamsBuffer = 12
+} BufferIndices;
+
 #endif /* Common_h */

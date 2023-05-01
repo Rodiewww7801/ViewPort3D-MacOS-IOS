@@ -18,7 +18,7 @@ extension Primitive {
     func renderPrimitive(encoder: MTLRenderCommandEncoder) {
         let primitive = self
         
-        encoder.setVertexBuffer(primitive.verticesBuffer, offset: 0, index: 0)
+        encoder.setVertexBuffer(primitive.verticesBuffer, offset: 0, index: VertexBuffer.index)
         
         //original primitive
         var translation = matrix_float4x4()
@@ -27,7 +27,7 @@ extension Primitive {
         translation.columns.2 = [0,0,1,0]
         translation.columns.3 = [0, 0, 0, 1]
         
-        encoder.setVertexBytes(&translation, length: MemoryLayout<matrix_float4x4>.stride, index: 12)
+        encoder.setVertexBytes(&translation, length: MemoryLayout<matrix_float4x4>.stride, index: UniformsBuffer.index)
         
         var color_1 = simd_float4(0.9,0.9,0.9,1)
         encoder.setFragmentBytes(&color_1, length: MemoryLayout<simd_float4>.stride, index: 0)
@@ -53,10 +53,10 @@ extension Primitive {
         
         matrix = translation * rotationMatrix * translation.inverse
         
-        encoder.setVertexBytes(&matrix, length: MemoryLayout<matrix_float4x4>.stride, index: 12)
+        encoder.setVertexBytes(&matrix, length: MemoryLayout<matrix_float4x4>.stride, index: UniformsBuffer.index)
         
         color_1 = simd_float4(0,0,1,1)
-        encoder.setFragmentBytes(&color_1, length: MemoryLayout<simd_float4>.stride, index: 0)
+        encoder.setFragmentBytes(&color_1, length: MemoryLayout<simd_float4>.stride, index: ParamsBuffer.index)
         
         encoder.drawIndexedPrimitives(
             type: .triangle,

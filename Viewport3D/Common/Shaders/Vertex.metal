@@ -7,21 +7,19 @@
 
 #include <metal_stdlib>
 using namespace metal;
-
 #import "Common.h"
+#import "ShaderDefs.h"
 
 struct VertexIn {
     float4 position [[attribute(0)]];
+    float3 normal [[attribute(1)]];
 };
 
-struct VertexOut {
-    float4 position [[position]];
-};
-
-vertex VertexOut vertex_main(const VertexIn vertex_in [[stage_in]], constant Uniforms &uniforms [[buffer(1)]]) {
+vertex VertexOut vertex_main(const VertexIn vertex_in [[stage_in]], constant Uniforms &uniforms [[buffer(11)]]) {
     float4 position = uniforms.projectionMatrix * uniforms.viewMatrix * uniforms.modelMatrix * vertex_in.position;
     VertexOut out {
-        .position = position
+        .position = position,
+        .normal = vertex_in.normal
     };
     return  out;
 }

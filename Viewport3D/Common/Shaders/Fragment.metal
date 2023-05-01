@@ -8,20 +8,13 @@
 #include <metal_stdlib>
 using namespace metal;
 #import "Common.h"
+#import "ShaderDefs.h"
 
-
-struct VertexIn {
-    float4 position [[attribute(0)]];
-};
-
-struct VertexOut {
-    float4 position [[position]];
-};
-
-fragment float4 fragment_main(VertexOut vertexIn [[stage_in]]) {
-    float color;
-    vertexIn.position.x < 200 ? color = 0 : color = 1;
-    return float4(color,color,color,1);
+fragment float4 fragment_main(VertexOut vertexOut [[stage_in]], constant ScreenParameters &screenParameters [[buffer(12)]]) {
+    float4 sky = float4(0.34, 0.9, 1.0, 1.0);
+    float4 earth = float4(0.29, 0.58, 0.2, 1.0);
+    float intensity = vertexOut.normal.y + 0.5;
+    return mix(earth, sky, intensity);
 }
 
 

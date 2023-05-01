@@ -22,6 +22,7 @@ class Model: Transformable {
         
         if let mdlMesh = asset.childObjects(of: MDLMesh.self).first as? MDLMesh {
             do {
+                mdlMesh.addNormals(withAttributeNamed: MDLVertexAttributeNormal, creaseThreshold: 0.0)
                 self.mesh = try MTKMesh(mesh: mdlMesh, device: device)
             } catch {
                 fatalError("\(error)")
@@ -35,7 +36,7 @@ class Model: Transformable {
     }
     
     func render(encoder: MTLRenderCommandEncoder) {
-        encoder.setVertexBuffer(self.mesh.vertexBuffers[0].buffer, offset: 0, index: 0)
+        encoder.setVertexBuffer(self.mesh.vertexBuffers[0].buffer, offset: 0, index: VertexBuffer.index)
         
         for submesh in mesh.submeshes {
             encoder.drawIndexedPrimitives(

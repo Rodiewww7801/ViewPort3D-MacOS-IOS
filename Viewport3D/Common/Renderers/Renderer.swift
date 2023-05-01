@@ -9,7 +9,6 @@ import Foundation
 import MetalKit
 
 class Renderer: NSObject {
-    
     static private(set) var device: MTLDevice!
     static private(set) var commandQueue: MTLCommandQueue!
     static private(set) var library: MTLLibrary!
@@ -19,14 +18,15 @@ class Renderer: NSObject {
     private var pipelineDescriptor: MTLRenderPipelineDescriptor!
     private var pipelineStateForModel: MTLRenderPipelineState!
     private var pipelineStateForPrimitive: MTLRenderPipelineState!
+    private var depthStencilState: MTLDepthStencilState?
     private let metalView: MTKView
     private var uniforms: Uniforms = Uniforms()
+    private var screenParameters: ScreenParameters = ScreenParameters()
 
     private let resourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
     private var timer: Float = 0.0
     private var primitive: Primitive?
     private var model: Model?
-    
     
     init(metalView: MTKView, renderOptions: RenderOptions) {
         print("[Renderer]: init")
@@ -42,12 +42,14 @@ class Renderer: NSObject {
         Renderer.commandQueue = commandQueue
         self.metalView = metalView
         self.renderOptions = renderOptions
-
+        self.depthStencilState = Renderer.buildDepthStencilState()
+        
         super.init()
         
         metalView.device = Renderer.device
         metalView.delegate = self
-        metalView.clearColor = MTLClearColorMake(255, 255, 255, 1)
+        metalView.clearColor = MTLClearColorMake(255, 255, 255, 0)
+        metalView.depthStencilPixelFormat = .depth32Float
         
         uniforms.modelMatrix = .identity
         uniforms.viewMatrix = float4x4(translation: [0, 0, -3]).inverse
@@ -57,6 +59,14 @@ class Renderer: NSObject {
         quadLogicSetup()
         
         mtkView(metalView, drawableSizeWillChange: metalView.bounds.size)
+    }
+    
+    static func buildDepthStencilState() -> MTLDepthStencilState? {
+        let descriptor = MTLDepthStencilDescriptor()
+        descriptor.depthCompareFunction = .less
+        descriptor.isDepthWriteEnabled = true
+        let depthStencilState = Renderer.device.makeDepthStencilState(descriptor: descriptor)
+        return depthStencilState
     }
     
     private func createLibrary() {
@@ -72,6 +82,7 @@ class Renderer: NSObject {
         pipelineDescriptor.vertexFunction = vertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
         pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
+        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
     }
     
     private func createPipelineDescriptorForPrimitive() {
@@ -82,6 +93,7 @@ class Renderer: NSObject {
         pipelineDescriptor.vertexFunction = vertexFunction
         pipelineDescriptor.fragmentFunction = fragmentFunction
         pipelineDescriptor.colorAttachments[0].pixelFormat = metalView.colorPixelFormat
+        pipelineDescriptor.depthAttachmentPixelFormat = .depth32Float
     }
     
     private func createPipelineStateForModel() {
@@ -110,6 +122,8 @@ class Renderer: NSObject {
 extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         setupFOV()
+        screenParameters.width = UInt32(size.width)
+        screenParameters.height = UInt32(size.height)
     }
     
     func draw(in view: MTKView) {
@@ -121,9 +135,11 @@ extension Renderer: MTKViewDelegate {
             print("[Renderer]: Coudn't render view")
             return
         }
+        setupScreenParameters(encoder: renderEncoder)
         
         switch renderOptions.renderChoise {
         case .model:
+            renderEncoder.setDepthStencilState(self.depthStencilState)
             renderEncoder.setRenderPipelineState(pipelineStateForModel)
             setupTransformForModel()
             setupUniform(renderEncoder: renderEncoder)
@@ -131,7 +147,7 @@ extension Renderer: MTKViewDelegate {
             renderObjectModel(renderEncoder: renderEncoder)
         case .primitive:
             renderEncoder.setRenderPipelineState(pipelineStateForPrimitive)
-            renderPrimitive(renderEncoder: renderEncoder)
+            renderQuad(renderEncoder: renderEncoder)
         default:
             break
         }
@@ -145,6 +161,10 @@ extension Renderer: MTKViewDelegate {
         
         commandBuffer.present(drawable)
         commandBuffer.commit()
+    }
+    
+    private func setupScreenParameters(encoder: MTLRenderCommandEncoder) {
+        encoder.setFragmentBytes(&screenParameters, length: MemoryLayout<ScreenParameters>.stride, index: 12)
     }
     
     private func setupTransformForModel() {
@@ -169,18 +189,22 @@ extension Renderer: MTKViewDelegate {
     }
     
     private func setupUniform(renderEncoder: MTLRenderCommandEncoder) {
-        renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 1)
+        renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: UniformsBuffer.index)
+    }
+    
+    private func renderQuad(renderEncoder: MTLRenderCommandEncoder) {
+        renderEncoder.setTriangleFillMode(.fill)
+        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
     }
     
     private func renderPrimitive(renderEncoder: MTLRenderCommandEncoder) {
-        //guard let primitive = primitive else { return }
+        guard let primitive = primitive else { return }
         renderEncoder.setTriangleFillMode(.fill)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
-        //primitive.renderPrimitive(encoder: renderEncoder)
+        primitive.renderPrimitive(encoder: renderEncoder)
     }
     
     private func renderObjectModel(renderEncoder: MTLRenderCommandEncoder) {
-        renderEncoder.setTriangleFillMode(.lines)
+        renderEncoder.setTriangleFillMode(.fill)
         model?.render(encoder: renderEncoder)
     }
 }
