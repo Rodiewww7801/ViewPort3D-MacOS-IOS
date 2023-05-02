@@ -36,11 +36,10 @@
 		F89F10B029FFC86800932551 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89F10AF29FFC86800932551 /* Transform.swift */; };
 		F89F10B229FFE7A400932551 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B129FFE7A400932551 /* Options.swift */; };
 		F89F10B429FFE92B00932551 /* Fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B329FFE92B00932551 /* Fragment.metal */; };
-		F89F10B72A004F9B00932551 /* BufferIndices + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B62A004F9B00932551 /* BufferIndices + Extension.swift */; };
-		F8BC39B62A01558E00276B79 /* AttributesIndices + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BC39B52A01558E00276B79 /* AttributesIndices + Extension.swift */; };
 		F8BC39B92A01667600276B79 /* TextureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BC39B82A01667600276B79 /* TextureController.swift */; };
 		F8BC39BC2A016E3D00276B79 /* Submesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BC39BB2A016E3D00276B79 /* Submesh.swift */; };
 		F8BC39BE2A01736300276B79 /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BC39BD2A01736300276B79 /* Mesh.swift */; };
+		F8BC39C02A017ECE00276B79 /* Common + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BC39BF2A017ECE00276B79 /* Common + Extensions.swift */; };
 		F8D5358229E60BBA00CCB8D2 /* Quad.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358129E60BBA00CCB8D2 /* Quad.swift */; };
 		F8D5358829E7580F00CCB8D2 /* VertexDescriptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358729E7580F00CCB8D2 /* VertexDescriptor + Extension.swift */; };
 /* End PBXBuildFile section */
@@ -79,11 +78,10 @@
 		F89F10B129FFE7A400932551 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		F89F10B329FFE92B00932551 /* Fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fragment.metal; sourceTree = "<group>"; };
 		F89F10B52A003F3D00932551 /* ShaderDefenitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderDefenitions.h; sourceTree = "<group>"; };
-		F89F10B62A004F9B00932551 /* BufferIndices + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BufferIndices + Extension.swift"; sourceTree = "<group>"; };
-		F8BC39B52A01558E00276B79 /* AttributesIndices + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributesIndices + Extension.swift"; sourceTree = "<group>"; };
 		F8BC39B82A01667600276B79 /* TextureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureController.swift; sourceTree = "<group>"; };
 		F8BC39BB2A016E3D00276B79 /* Submesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Submesh.swift; sourceTree = "<group>"; };
 		F8BC39BD2A01736300276B79 /* Mesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
+		F8BC39BF2A017ECE00276B79 /* Common + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Common + Extensions.swift"; sourceTree = "<group>"; };
 		F8D5358129E60BBA00CCB8D2 /* Quad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quad.swift; sourceTree = "<group>"; };
 		F8D5358729E7580F00CCB8D2 /* VertexDescriptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VertexDescriptor + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -248,8 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				F8D5358729E7580F00CCB8D2 /* VertexDescriptor + Extension.swift */,
-				F89F10B62A004F9B00932551 /* BufferIndices + Extension.swift */,
-				F8BC39B52A01558E00276B79 /* AttributesIndices + Extension.swift */,
+				F8BC39BF2A017ECE00276B79 /* Common + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -402,9 +399,8 @@
 				F8BC39B92A01667600276B79 /* TextureController.swift in Sources */,
 				F85AA9A729E30C1B009711EA /* MetalView.swift in Sources */,
 				F872891E29F6EA2800B70AC4 /* Primitive.swift in Sources */,
-				F8BC39B62A01558E00276B79 /* AttributesIndices + Extension.swift in Sources */,
 				F8BC39BE2A01736300276B79 /* Mesh.swift in Sources */,
-				F89F10B72A004F9B00932551 /* BufferIndices + Extension.swift in Sources */,
+				F8BC39C02A017ECE00276B79 /* Common + Extensions.swift in Sources */,
 				F872891C29F6E77B00B70AC4 /* Triangle.swift in Sources */,
 				F85AA9A129E308D8009711EA /* Renderer.swift in Sources */,
 				F872891A29F6CC9600B70AC4 /* GridView.swift in Sources */,

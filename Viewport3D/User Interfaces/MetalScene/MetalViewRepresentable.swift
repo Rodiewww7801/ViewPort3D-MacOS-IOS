@@ -39,7 +39,6 @@ struct MetalViewRepresentable: ViewRepresentable {
     
     private func updateMetalView() {
         renderer?.renderOptions  = renderOptions
-        print("[Renderer]: updateMetalView")
     }
 }
 

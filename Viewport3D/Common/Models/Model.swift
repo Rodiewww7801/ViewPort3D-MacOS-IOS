@@ -56,13 +56,15 @@ extension Model {
                 encoder.setVertexBuffer(mtkMeshVertexBuffer.buffer, offset: 0, index: index)
             }
             
-            for mtkSubmesh in mesh.submesh.map({ $0.mtkSubmesh }) {
+            for submesh in mesh.submesh {
+                encoder.setFragmentTexture(submesh.textures.baseColor, index: BaseColor.index)
+                
                 encoder.drawIndexedPrimitives(
                     type: .triangle,
-                    indexCount: mtkSubmesh.indexCount,
-                    indexType: mtkSubmesh.indexType,
-                    indexBuffer: mtkSubmesh.indexBuffer.buffer,
-                    indexBufferOffset: mtkSubmesh.indexBuffer.offset)
+                    indexCount: submesh.mtkSubmesh.indexCount,
+                    indexType: submesh.mtkSubmesh.indexType,
+                    indexBuffer: submesh.mtkSubmesh.indexBuffer.buffer,
+                    indexBufferOffset: submesh.mtkSubmesh.indexBuffer.offset)
             }
         }
     }

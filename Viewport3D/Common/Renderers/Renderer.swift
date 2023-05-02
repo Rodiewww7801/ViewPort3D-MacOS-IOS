@@ -29,13 +29,11 @@ class Renderer: NSObject {
     private var model: Model?
     
     init(metalView: MTKView, renderOptions: RenderOptions) {
-        print("[Renderer]: init")
-        
         guard
             let device = MTLCreateSystemDefaultDevice(),
             let commandQueue = device.makeCommandQueue()
         else {
-            fatalError("Coud not support Metal")
+            fatalError("[Renderer]: Coud not support Metal")
         }
         
         Renderer.device = device
