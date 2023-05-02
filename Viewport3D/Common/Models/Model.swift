@@ -8,13 +8,9 @@
 import MetalKit
 
 class Model: Transformable {
-    //let mesh: MTKMesh
     let name: String
     var transform: Transform
-    
-    //todo: Create separated model for meshes
-    var mdlMeshes: [MDLMesh] = []
-    var mtkMeshes: [MTKMesh] = []
+    var meshes: [Mesh] = []
     
     private var timer: Float = 0.0
     
@@ -31,8 +27,8 @@ class Model: Transformable {
                 mdlMesh.addNormals(withAttributeNamed: MDLVertexAttributeNormal, creaseThreshold: 0.0)
                 let mtkMesh = try? MTKMesh(mesh: mdlMesh, device: device)
                 if let mtkMesh = mtkMesh {
-                    self.mdlMeshes.append(mdlMesh)
-                    self.mtkMeshes.append(mtkMesh)
+                    let mesh = Mesh(mdlMesh: mdlMesh, mtkMesh: mtkMesh)
+                    meshes.append(mesh)
                 }
             }
         }
@@ -54,14 +50,13 @@ extension Model {
     }
     
     func render(encoder: MTLRenderCommandEncoder) {
-        
         // render meshes
-        for mtkMesh in mtkMeshes {
-            for (index, mtkMeshVertexBuffer) in mtkMesh.vertexBuffers.enumerated() {
+        for mesh in meshes {
+            for (index, mtkMeshVertexBuffer) in mesh.mtkMesh.vertexBuffers.enumerated() {
                 encoder.setVertexBuffer(mtkMeshVertexBuffer.buffer, offset: 0, index: index)
             }
             
-            for mtkSubmesh in mtkMesh.submeshes {
+            for mtkSubmesh in mesh.submesh.map({ $0.mtkSubmesh }) {
                 encoder.drawIndexedPrimitives(
                     type: .triangle,
                     indexCount: mtkSubmesh.indexCount,

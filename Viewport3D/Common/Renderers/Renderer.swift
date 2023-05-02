@@ -143,9 +143,7 @@ extension Renderer: MTKViewDelegate {
             renderEncoder.setRenderPipelineState(pipelineStateForModel)
             setupTransformForModel()
             setupUniform(renderEncoder: renderEncoder)
-            setupTimer(renderEncoder: renderEncoder)
             renderObjectModel(renderEncoder: renderEncoder)
-            setupTransformForModel()
         case .primitive:
             renderEncoder.setRenderPipelineState(pipelineStateForPrimitive)
             renderQuad(renderEncoder: renderEncoder)
