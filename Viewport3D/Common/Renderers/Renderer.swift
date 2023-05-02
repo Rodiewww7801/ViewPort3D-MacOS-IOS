@@ -145,6 +145,7 @@ extension Renderer: MTKViewDelegate {
             setupUniform(renderEncoder: renderEncoder)
             setupTimer(renderEncoder: renderEncoder)
             renderObjectModel(renderEncoder: renderEncoder)
+            setupTransformForModel()
         case .primitive:
             renderEncoder.setRenderPipelineState(pipelineStateForPrimitive)
             renderQuad(renderEncoder: renderEncoder)
@@ -164,15 +165,12 @@ extension Renderer: MTKViewDelegate {
     }
     
     private func setupScreenParameters(encoder: MTLRenderCommandEncoder) {
-        encoder.setFragmentBytes(&screenParameters, length: MemoryLayout<ScreenParameters>.stride, index: 12)
+        encoder.setFragmentBytes(&screenParameters, length: MemoryLayout<ScreenParameters>.stride, index: ScreenParametersBuffer.index)
     }
     
     private func setupTransformForModel() {
         guard let model = model else { return }
-        self.timer += 0.05
-        let sinTimer = sin(timer)
-        model.transform.position = [0,0,0]
-        model.transform.rotation = [0, sinTimer + Float(-90).degreesToRadians , 0]
+        model.transformModel()
         uniforms.modelMatrix = model.transform.modelMatrix
     }
     

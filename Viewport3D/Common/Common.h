@@ -23,8 +23,15 @@ typedef struct {
 
 typedef enum {
     VertexBuffer = 0,
+    UVBuffer = 1,
     UniformsBuffer = 11,
-    ParamsBuffer = 12
+    ScreenParametersBuffer = 12
 } BufferIndices;
+
+typedef enum {
+    PositionAttribute = 0,
+    NormalAttribute = 1,
+    UVAttribute = 2
+} AttributesIndices;
 
 #endif /* Common_h */

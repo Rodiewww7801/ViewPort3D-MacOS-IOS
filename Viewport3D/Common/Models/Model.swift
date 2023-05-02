@@ -8,9 +8,15 @@
 import MetalKit
 
 class Model: Transformable {
-    let mesh: MTKMesh
+    //let mesh: MTKMesh
     let name: String
     var transform: Transform
+    
+    //todo: Create separated model for meshes
+    var mdlMeshes: [MDLMesh] = []
+    var mtkMeshes: [MTKMesh] = []
+    
+    private var timer: Float = 0.0
     
     init(device: MTLDevice, name: String) {
         guard let assetURL = Bundle.main.url(forResource: name, withExtension: "obj") else {
@@ -20,31 +26,50 @@ class Model: Transformable {
         let allocator = MTKMeshBufferAllocator(device: device)
         let asset = MDLAsset(url: assetURL, vertexDescriptor: .modelDefaultLayout, bufferAllocator: allocator)
         
-        if let mdlMesh = asset.childObjects(of: MDLMesh.self).first as? MDLMesh {
-            do {
+        if let mdlMeshes = asset.childObjects(of: MDLMesh.self) as? [MDLMesh] {
+            for mdlMesh in mdlMeshes {
                 mdlMesh.addNormals(withAttributeNamed: MDLVertexAttributeNormal, creaseThreshold: 0.0)
-                self.mesh = try MTKMesh(mesh: mdlMesh, device: device)
-            } catch {
-                fatalError("\(error)")
+                let mtkMesh = try? MTKMesh(mesh: mdlMesh, device: device)
+                if let mtkMesh = mtkMesh {
+                    self.mdlMeshes.append(mdlMesh)
+                    self.mtkMeshes.append(mtkMesh)
+                }
             }
-        } else {
-            fatalError("coudnt init MDLMesh for model")
         }
         
         self.name = name
         self.transform = Transform()
     }
+}
+
+// MARK: - Render
+
+extension Model {
+    
+    func transformModel() {
+        self.timer += 0.05
+        let sinTimer = sin(timer)
+        self.transform.position = [0,0,0]
+        self.transform.rotation = [0, sinTimer + Float(-90).degreesToRadians , 0]
+    }
     
     func render(encoder: MTLRenderCommandEncoder) {
-        encoder.setVertexBuffer(self.mesh.vertexBuffers[0].buffer, offset: 0, index: VertexBuffer.index)
         
-        for submesh in mesh.submeshes {
-            encoder.drawIndexedPrimitives(
-                type: .triangle,
-                indexCount: submesh.indexCount,
-                indexType: submesh.indexType,
-                indexBuffer: submesh.indexBuffer.buffer,
-                indexBufferOffset: submesh.indexBuffer.offset)
+        // render meshes
+        for mtkMesh in mtkMeshes {
+            for (index, mtkMeshVertexBuffer) in mtkMesh.vertexBuffers.enumerated() {
+                encoder.setVertexBuffer(mtkMeshVertexBuffer.buffer, offset: 0, index: index)
+            }
+            
+            for mtkSubmesh in mtkMesh.submeshes {
+                encoder.drawIndexedPrimitives(
+                    type: .triangle,
+                    indexCount: mtkSubmesh.indexCount,
+                    indexType: mtkSubmesh.indexType,
+                    indexBuffer: mtkSubmesh.indexBuffer.buffer,
+                    indexBufferOffset: mtkSubmesh.indexBuffer.offset)
+            }
         }
     }
+    
 }

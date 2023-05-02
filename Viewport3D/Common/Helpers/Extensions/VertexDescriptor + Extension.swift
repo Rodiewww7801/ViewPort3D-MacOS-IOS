@@ -1,5 +1,5 @@
 //
-//  VertexDescriptor.swift
+//  VertexDescriptor + Extension.swift
 //  Viewport3D
 //
 //  Created by Rodion Hladchenko on 13.04.2023.
@@ -42,13 +42,28 @@ extension MDLVertexDescriptor {
     static var modelDefaultLayout: MDLVertexDescriptor {
         let vertexDescriptor = MDLVertexDescriptor()
         var offset = 0
-        vertexDescriptor.attributes[0] = MDLVertexAttribute(name: MDLVertexAttributePosition, format: .float3, offset: 0, bufferIndex: 0)
+        vertexDescriptor.attributes[PositionAttribute.index] = MDLVertexAttribute(
+            name: MDLVertexAttributePosition,
+            format: .float3,
+            offset: 0,
+            bufferIndex: VertexBuffer.index)
         offset += MemoryLayout<float3>.stride
         
-        vertexDescriptor.attributes[1] = MDLVertexAttribute(name: MDLVertexAttributeNormal, format: .float3, offset: offset, bufferIndex: 0)
+        vertexDescriptor.attributes[NormalAttribute.index] = MDLVertexAttribute(
+            name: MDLVertexAttributeNormal,
+            format: .float3,
+            offset: offset,
+            bufferIndex: VertexBuffer.index)
         offset += MemoryLayout<float3>.stride
+        vertexDescriptor.layouts[VertexBuffer.index] = MDLVertexBufferLayout(stride: offset)
         
-        vertexDescriptor.layouts[0] = MDLVertexBufferLayout(stride: offset)
+        vertexDescriptor.attributes[UVAttribute.index] = MDLVertexAttribute(
+            name: MDLVertexAttributeTextureCoordinate,
+            format: .float2,
+            offset: 0,
+            bufferIndex: UVBuffer.index)
+        vertexDescriptor.layouts[UVBuffer.index] = MDLVertexBufferLayout(stride: MemoryLayout<float2>.stride)
+        
         return vertexDescriptor
     }
 }

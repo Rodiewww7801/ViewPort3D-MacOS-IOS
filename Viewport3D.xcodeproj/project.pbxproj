@@ -28,7 +28,7 @@
 		F86ED98E29E2FC2F000D9680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F86ED98D29E2FC2F000D9680 /* Assets.xcassets */; };
 		F872891A29F6CC9600B70AC4 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872891929F6CC9600B70AC4 /* GridView.swift */; };
 		F872891C29F6E77B00B70AC4 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872891B29F6E77B00B70AC4 /* Triangle.swift */; };
-		F872891E29F6EA2800B70AC4 /* Primitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872891D29F6EA2800B70AC4 /* Primitives.swift */; };
+		F872891E29F6EA2800B70AC4 /* Primitive.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872891D29F6EA2800B70AC4 /* Primitive.swift */; };
 		F872892029F6FCBB00B70AC4 /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872891F29F6FCBB00B70AC4 /* Color + Extension.swift */; };
 		F87C9DD329FC791D006ED0DE /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87C9DD229FC791D006ED0DE /* MathLibrary.swift */; };
 		F87C9DD529FD1DE3006ED0DE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87C9DD429FD1DE3006ED0DE /* Model.swift */; };
@@ -37,8 +37,9 @@
 		F89F10B229FFE7A400932551 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B129FFE7A400932551 /* Options.swift */; };
 		F89F10B429FFE92B00932551 /* Fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B329FFE92B00932551 /* Fragment.metal */; };
 		F89F10B72A004F9B00932551 /* BufferIndices + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B62A004F9B00932551 /* BufferIndices + Extension.swift */; };
+		F8BC39B62A01558E00276B79 /* AttributesIndices + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BC39B52A01558E00276B79 /* AttributesIndices + Extension.swift */; };
 		F8D5358229E60BBA00CCB8D2 /* Quad.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358129E60BBA00CCB8D2 /* Quad.swift */; };
-		F8D5358829E7580F00CCB8D2 /* VertexDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358729E7580F00CCB8D2 /* VertexDescriptor.swift */; };
+		F8D5358829E7580F00CCB8D2 /* VertexDescriptor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5358729E7580F00CCB8D2 /* VertexDescriptor + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +67,7 @@
 		F86ED98F29E2FC2F000D9680 /* Viewport3D.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Viewport3D.entitlements; sourceTree = "<group>"; };
 		F872891929F6CC9600B70AC4 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		F872891B29F6E77B00B70AC4 /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
-		F872891D29F6EA2800B70AC4 /* Primitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Primitives.swift; sourceTree = "<group>"; };
+		F872891D29F6EA2800B70AC4 /* Primitive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Primitive.swift; sourceTree = "<group>"; };
 		F872891F29F6FCBB00B70AC4 /* Color + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + Extension.swift"; sourceTree = "<group>"; };
 		F87C9DD229FC791D006ED0DE /* MathLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
 		F87C9DD429FD1DE3006ED0DE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -74,10 +75,11 @@
 		F89F10AF29FFC86800932551 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		F89F10B129FFE7A400932551 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		F89F10B329FFE92B00932551 /* Fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fragment.metal; sourceTree = "<group>"; };
-		F89F10B52A003F3D00932551 /* ShaderDefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderDefs.h; sourceTree = "<group>"; };
+		F89F10B52A003F3D00932551 /* ShaderDefenitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderDefenitions.h; sourceTree = "<group>"; };
 		F89F10B62A004F9B00932551 /* BufferIndices + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BufferIndices + Extension.swift"; sourceTree = "<group>"; };
+		F8BC39B52A01558E00276B79 /* AttributesIndices + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributesIndices + Extension.swift"; sourceTree = "<group>"; };
 		F8D5358129E60BBA00CCB8D2 /* Quad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quad.swift; sourceTree = "<group>"; };
-		F8D5358729E7580F00CCB8D2 /* VertexDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexDescriptor.swift; sourceTree = "<group>"; };
+		F8D5358729E7580F00CCB8D2 /* VertexDescriptor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VertexDescriptor + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,9 +96,9 @@
 		F8200FF029F6CC38006D0F94 /* Viewport Interface Scene */ = {
 			isa = PBXGroup;
 			children = (
+				F8BC39B42A0146B700276B79 /* ViewModel */,
 				F86ED98B29E2FC2E000D9680 /* ContentView.swift */,
 				F872891929F6CC9600B70AC4 /* GridView.swift */,
-				F89F10B129FFE7A400932551 /* Options.swift */,
 			);
 			path = "Viewport Interface Scene";
 			sourceTree = "<group>";
@@ -136,17 +138,12 @@
 			path = "Anime model";
 			sourceTree = "<group>";
 		};
-		F85AA9D729E323D1009711EA /* Models */ = {
+		F85AA9D729E323D1009711EA /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				F8D5358129E60BBA00CCB8D2 /* Quad.swift */,
-				F872891B29F6E77B00B70AC4 /* Triangle.swift */,
-				F817497A29F06AE500EB1AA5 /* Sphere.swift */,
-				F872891D29F6EA2800B70AC4 /* Primitives.swift */,
-				F87C9DD429FD1DE3006ED0DE /* Model.swift */,
 				F89F10AF29FFC86800932551 /* Transform.swift */,
 			);
-			path = Models;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		F86ED97D29E2FC2E000D9680 = {
@@ -171,7 +168,7 @@
 				F86ED99829E300A4000D9680 /* Application */,
 				F85AA9A929E3160E009711EA /* Shared Data */,
 				F87C9DD729FD24B9006ED0DE /* Common */,
-				F86ED99929E300B9000D9680 /* Views */,
+				F86ED99929E300B9000D9680 /* User Interfaces */,
 			);
 			path = Viewport3D;
 			sourceTree = "<group>";
@@ -187,14 +184,14 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		F86ED99929E300B9000D9680 /* Views */ = {
+		F86ED99929E300B9000D9680 /* User Interfaces */ = {
 			isa = PBXGroup;
 			children = (
 				F87C9DD629FD1F0D006ED0DE /* Helper + Extension */,
 				F8200FF029F6CC38006D0F94 /* Viewport Interface Scene */,
 				F85AA9A829E30C74009711EA /* MetalScene */,
 			);
-			path = Views;
+			path = "User Interfaces";
 			sourceTree = "<group>";
 		};
 		F87C9DD629FD1F0D006ED0DE /* Helper + Extension */ = {
@@ -209,8 +206,9 @@
 			isa = PBXGroup;
 			children = (
 				F87C9DD929FF0D08006ED0DE /* Common.h */,
+				F8BC39AD2A013F7C00276B79 /* Models */,
 				F8D5358629E757F900CCB8D2 /* Helpers */,
-				F85AA9D729E323D1009711EA /* Models */,
+				F85AA9D729E323D1009711EA /* Entities */,
 				F8D5358529E60F4700CCB8D2 /* Shaders */,
 				F87C9DD829FD24DF006ED0DE /* Renderers */,
 			);
@@ -225,12 +223,50 @@
 			path = Renderers;
 			sourceTree = "<group>";
 		};
+		F8BC39AD2A013F7C00276B79 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F8D5358129E60BBA00CCB8D2 /* Quad.swift */,
+				F872891B29F6E77B00B70AC4 /* Triangle.swift */,
+				F817497A29F06AE500EB1AA5 /* Sphere.swift */,
+				F872891D29F6EA2800B70AC4 /* Primitive.swift */,
+				F87C9DD429FD1DE3006ED0DE /* Model.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F8BC39B22A01462700276B79 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F8D5358729E7580F00CCB8D2 /* VertexDescriptor + Extension.swift */,
+				F89F10B62A004F9B00932551 /* BufferIndices + Extension.swift */,
+				F8BC39B52A01558E00276B79 /* AttributesIndices + Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F8BC39B32A01463500276B79 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				F87C9DD229FC791D006ED0DE /* MathLibrary.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		F8BC39B42A0146B700276B79 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F89F10B129FFE7A400932551 /* Options.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		F8D5358529E60F4700CCB8D2 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				F89F10B52A003F3D00932551 /* ShaderDefenitions.h */,
 				F85AA9D829E35DB5009711EA /* Vertex.metal */,
 				F89F10B329FFE92B00932551 /* Fragment.metal */,
-				F89F10B52A003F3D00932551 /* ShaderDefs.h */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -238,9 +274,8 @@
 		F8D5358629E757F900CCB8D2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				F8D5358729E7580F00CCB8D2 /* VertexDescriptor.swift */,
-				F87C9DD229FC791D006ED0DE /* MathLibrary.swift */,
-				F89F10B62A004F9B00932551 /* BufferIndices + Extension.swift */,
+				F8BC39B32A01463500276B79 /* Utility */,
+				F8BC39B22A01462700276B79 /* Extensions */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -335,11 +370,12 @@
 				F89F10B029FFC86800932551 /* Transform.swift in Sources */,
 				F817497B29F06AE500EB1AA5 /* Sphere.swift in Sources */,
 				F89F10B429FFE92B00932551 /* Fragment.metal in Sources */,
-				F8D5358829E7580F00CCB8D2 /* VertexDescriptor.swift in Sources */,
+				F8D5358829E7580F00CCB8D2 /* VertexDescriptor + Extension.swift in Sources */,
 				F85AA9A529E309B6009711EA /* MetalViewRepresentable.swift in Sources */,
 				F86ED98C29E2FC2E000D9680 /* ContentView.swift in Sources */,
 				F85AA9A729E30C1B009711EA /* MetalView.swift in Sources */,
-				F872891E29F6EA2800B70AC4 /* Primitives.swift in Sources */,
+				F872891E29F6EA2800B70AC4 /* Primitive.swift in Sources */,
+				F8BC39B62A01558E00276B79 /* AttributesIndices + Extension.swift in Sources */,
 				F89F10B72A004F9B00932551 /* BufferIndices + Extension.swift in Sources */,
 				F872891C29F6E77B00B70AC4 /* Triangle.swift in Sources */,
 				F85AA9A129E308D8009711EA /* Renderer.swift in Sources */,

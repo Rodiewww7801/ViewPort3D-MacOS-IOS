@@ -1,5 +1,5 @@
 //
-//  Primitives.swift
+//  Primitive.swift
 //  Viewport3D
 //
 //  Created by Rodion Hladchenko on 24.04.2023.
@@ -56,7 +56,7 @@ extension Primitive {
         encoder.setVertexBytes(&matrix, length: MemoryLayout<matrix_float4x4>.stride, index: UniformsBuffer.index)
         
         color_1 = simd_float4(0,0,1,1)
-        encoder.setFragmentBytes(&color_1, length: MemoryLayout<simd_float4>.stride, index: ParamsBuffer.index)
+        encoder.setFragmentBytes(&color_1, length: MemoryLayout<simd_float4>.stride, index: ScreenParametersBuffer.index)
         
         encoder.drawIndexedPrimitives(
             type: .triangle,
