@@ -19,6 +19,11 @@ class TextureController {
             .SRGB : false,
             .generateMipmaps: NSNumber(value: true)
         ]
+        
+        if let texture = try? textureLoader.newTexture(name: filename, scaleFactor: 1.0, bundle: Bundle.main, options: nil) {
+            return texture
+        }
+        
         let fileExtension = URL(fileURLWithPath: filename).pathExtension.isEmpty ? "png" : nil
         
         guard let url = Bundle.main.url(forResource: filename, withExtension: fileExtension) else {

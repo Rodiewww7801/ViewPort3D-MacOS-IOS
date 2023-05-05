@@ -241,7 +241,7 @@ extension Renderer: MTKViewDelegate {
     
     private func renderGroundModel(renderEncoder: MTLRenderCommandEncoder) {
         guard let groundModel = groundModel else { return }
-        self.groundModel?.tiling = UInt32(32)
+        self.groundModel?.tiling = UInt32(64)
         renderParameters.tiling = groundModel.tiling
         setupRenderParameters(encoder: renderEncoder)
         groundModel.render(encoder: renderEncoder)

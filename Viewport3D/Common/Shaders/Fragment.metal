@@ -14,7 +14,7 @@ fragment float4 fragment_main(VertexOut vertexOut [[stage_in]],
                               texture2d<float> baseColorTexture [[texture(BaseColor)]],
                               constant RenderParameters &fragmentParameters [[buffer(RenderParametersBuffer)]]) {
     constexpr sampler textureSampler(filter:: linear,
-                                     address:: repeat,
+                                     address:: mirrored_repeat,
                                      mip_filter::linear,
                                      max_anisotropy(16));
     float3 baseColor = baseColorTexture.sample(textureSampler, vertexOut.uv * fragmentParameters.tiling).rgb;

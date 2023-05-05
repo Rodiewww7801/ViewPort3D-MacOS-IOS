@@ -232,7 +232,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "04F86E5A-F1B2-4FD2-B10A-D73C393EF5B0"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Viewport3D/Common/Renderers/Renderer.swift"
@@ -241,6 +241,150 @@
             startingLineNumber = "148"
             endingLineNumber = "148"
             landmarkName = "draw(in:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4AE7E434-6DE9-4A1B-822D-B4436F122BE0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Viewport3D/Common/Renderers/Renderer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "draw(in:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2AE04B45-922F-499A-AF8C-11E23749EF0F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Viewport3D/Common/Renderers/Renderer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
+            landmarkName = "groundModelLogicSetup()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F4FF0B83-D366-4124-ADF2-FD7116D56BA3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Viewport3D/Common/Models/Model.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "init(device:name:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F4FF0B83-D366-4124-ADF2-FD7116D56BA3 - 56400eeff4b367d9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Viewport3D.Model.init(device: __C.MTLDevice, name: Swift.String) -&gt; Viewport3D.Model"
+                  moduleName = "Viewport3D"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my%20repos/MetalKitTutorials/ViewPort3D-MacOS-IOS/Viewport3D/Common/Models/Model.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "588">
+               </Location>
+               <Location
+                  uuid = "F4FF0B83-D366-4124-ADF2-FD7116D56BA3 - 56400eeff4b367d9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Viewport3D.Model.init(device: __C.MTLDevice, name: Swift.String) -&gt; Viewport3D.Model"
+                  moduleName = "Viewport3D"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my%20repos/MetalKitTutorials/ViewPort3D-MacOS-IOS/Viewport3D/Common/Models/Model.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "848">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2A262CAA-7461-40BB-AC93-C6F1E461B533"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Viewport3D/Common/Entities/Submesh.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "property(with:)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "2A262CAA-7461-40BB-AC93-C6F1E461B533 - 8a34f68785584a94"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property(with: __C.MDLMaterialSemantic) -&gt; Swift.Optional&lt;__C.MTLTexture&gt;"
+                  moduleName = "Viewport3D"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my%20repos/MetalKitTutorials/ViewPort3D-MacOS-IOS/Viewport3D/Common/Entities/Submesh.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "2A262CAA-7461-40BB-AC93-C6F1E461B533 - 8a34f68785584a94"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property(with: __C.MDLMaterialSemantic) -&gt; Swift.Optional&lt;__C.MTLTexture&gt;"
+                  moduleName = "Viewport3D"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my%20repos/MetalKitTutorials/ViewPort3D-MacOS-IOS/Viewport3D/Common/Entities/Submesh.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "180">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DB089B5E-A53D-49C8-A156-5E534DBE0CED"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Viewport3D/Common/Entities/Submesh.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "init(material:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
