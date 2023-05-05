@@ -23,10 +23,11 @@ class Renderer: NSObject {
     private var uniforms: Uniforms = Uniforms()
     private var screenParameters: ScreenParameters = ScreenParameters()
 
-    private let resourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
+    private let animeModelResourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
     private var timer: Float = 0.0
     private var primitive: Primitive?
-    private var model: Model?
+    private var animeModel: Model?
+    private var groundModel: Model?
     
     init(metalView: MTKView, renderOptions: RenderOptions) {
         guard
@@ -50,10 +51,11 @@ class Renderer: NSObject {
         metalView.depthStencilPixelFormat = .depth32Float
         
         uniforms.modelMatrix = .identity
-        uniforms.viewMatrix = float4x4(translation: [0, 0, -3]).inverse
+        uniforms.viewMatrix = .identity
         uniforms.projectionMatrix = .identity
         
-        modelLogicSetup()
+        AnimeModelLogicSetup()
+        groundModelLogicSetup()
         quadLogicSetup()
         
         mtkView(metalView, drawableSizeWillChange: metalView.bounds.size)
@@ -134,21 +136,29 @@ extension Renderer: MTKViewDelegate {
             return
         }
         setupScreenParameters(encoder: renderEncoder)
+        setupViewPosition()
         
         switch renderOptions.renderChoise {
         case .model:
             renderEncoder.setDepthStencilState(self.depthStencilState)
             renderEncoder.setRenderPipelineState(pipelineStateForModel)
-            setupTransformForModel()
+            
+            setupTimer()
+            
+            setupTransformForAnimeModel()
             setupUniform(renderEncoder: renderEncoder)
-            renderObjectModel(renderEncoder: renderEncoder)
+            renderAnimeModel(renderEncoder: renderEncoder)
+            
+            setupTransformForGroundModel()
+            setupUniform(renderEncoder: renderEncoder)
+            renderGroundModel(renderEncoder: renderEncoder)
         case .primitive:
             renderEncoder.setRenderPipelineState(pipelineStateForPrimitive)
             renderQuad(renderEncoder: renderEncoder)
         default:
             break
         }
-        
+
         renderEncoder.endEncoding()
         
         guard let drawable = view.currentDrawable else {
@@ -160,14 +170,10 @@ extension Renderer: MTKViewDelegate {
         commandBuffer.commit()
     }
     
+// MARK: - Setup Scene
+    
     private func setupScreenParameters(encoder: MTLRenderCommandEncoder) {
         encoder.setFragmentBytes(&screenParameters, length: MemoryLayout<ScreenParameters>.stride, index: ScreenParametersBuffer.index)
-    }
-    
-    private func setupTransformForModel() {
-        guard let model = model else { return }
-        model.transformModel()
-        uniforms.modelMatrix = model.transform.modelMatrix
     }
     
     private func setupFOV() {
@@ -176,15 +182,40 @@ extension Renderer: MTKViewDelegate {
         uniforms.projectionMatrix = projectionMatrix
     }
     
-    private func setupTimer(renderEncoder: MTLRenderCommandEncoder) {
+    private func setupViewPosition() {
+        let translation = float4x4(translation: [0,1.3,-3]).inverse
+        let sinTimer = sin(timer)
+        let rotation = float4x4(rotation: [Float(2).degreesToRadians, sinTimer, 0]).inverse
+        self.uniforms.viewMatrix = translation * rotation
+    }
+    
+    private func setupTimer() {
         timer += 0.005
-        let currentTime = sin(timer)
-        self.uniforms.modelMatrix = float4x4(rotation: [0, currentTime, 0])
     }
     
     private func setupUniform(renderEncoder: MTLRenderCommandEncoder) {
         renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: UniformsBuffer.index)
     }
+    
+    private func setupTransformForAnimeModel() {
+        guard let model = animeModel else { return }
+        
+        model.transform.position = [0,1.3,0]
+        model.transform.rotation = [0, 0 + Float(-90).degreesToRadians , 0]
+        
+        uniforms.modelMatrix = model.transform.modelMatrix
+    }
+    
+    private func setupTransformForGroundModel() {
+        guard let groundModel = groundModel else { return }
+        
+        groundModel.transform.scale = 40
+        groundModel.transform.rotation = [0, 0, 0 ]
+        
+        uniforms.modelMatrix = groundModel.transform.modelMatrix
+    }
+    
+// MARK: - Render functions
     
     private func renderQuad(renderEncoder: MTLRenderCommandEncoder) {
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
@@ -195,9 +226,13 @@ extension Renderer: MTKViewDelegate {
         primitive.renderPrimitive(encoder: renderEncoder)
     }
     
-    private func renderObjectModel(renderEncoder: MTLRenderCommandEncoder) {
+    private func renderAnimeModel(renderEncoder: MTLRenderCommandEncoder) {
         renderEncoder.setTriangleFillMode(.fill)
-        model?.render(encoder: renderEncoder)
+        animeModel?.render(encoder: renderEncoder)
+    }
+    
+    private func renderGroundModel(renderEncoder: MTLRenderCommandEncoder) {
+        groundModel?.render(encoder: renderEncoder)
     }
 }
 
@@ -223,17 +258,23 @@ extension Renderer {
     private func quadLogicSetup() {
         createLibrary()
         createPipelineDescriptorForPrimitive()
-        //createQuad()
-        //self.pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.primitiveDefaultLayout
         createPipelineStateForPrimitive()
     }
     
     private func modelLogicSetup() {
         createLibrary()
         createPipelineDescriptorForModel()
-        createModel()
         self.pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.modelDefaultLayout
         createPipelineStateForModel()
+    }
+    
+    private func AnimeModelLogicSetup() {
+        createAnimeModel()
+        modelLogicSetup()
+    }
+    
+    private func groundModelLogicSetup() {
+        self.groundModel = Model(device: Renderer.device, name: "plane")
     }
     
     private func createSphere() {
@@ -251,8 +292,8 @@ extension Renderer {
         self.primitive = quad
     }
     
-    private func createModel() {
-        let model = Model(device: Renderer.device, name: resourceName)
-        self.model = model
+    private func createAnimeModel() {
+        let model = Model(device: Renderer.device, name: animeModelResourceName)
+        self.animeModel = model
     }
 }

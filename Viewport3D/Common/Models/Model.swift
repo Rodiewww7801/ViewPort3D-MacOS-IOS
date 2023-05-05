@@ -40,15 +40,7 @@ class Model: Transformable {
 
 // MARK: - Render
 
-extension Model {
-    
-    func transformModel() {
-        self.timer += 0.05
-        let sinTimer = sin(timer)
-        self.transform.position = [0,0,0]
-        self.transform.rotation = [0, sinTimer + Float(-90).degreesToRadians , 0]
-    }
-    
+extension Model {    
     func render(encoder: MTLRenderCommandEncoder) {
         encoder.setTriangleFillMode(.fill)
         

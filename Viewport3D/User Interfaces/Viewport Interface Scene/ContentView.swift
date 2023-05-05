@@ -12,7 +12,7 @@ struct ContentView: View {
     private let size: CGFloat = 400
     @ObservedObject var renderOptions: RenderOptions = RenderOptions()
     
-    @State private var showGrid = true
+    @State private var showGrid = false
     
     var body: some View {
         VStack {

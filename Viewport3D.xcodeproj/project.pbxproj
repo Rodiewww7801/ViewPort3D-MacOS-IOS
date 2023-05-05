@@ -23,6 +23,11 @@
 		F85AA9D529E3167A009711EA /* face_c.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F85AA9CA29E3167A009711EA /* face_c.jpg */; };
 		F85AA9D629E3167A009711EA /* body_lili.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F85AA9CB29E3167A009711EA /* body_lili.jpg */; };
 		F85AA9D929E35DB5009711EA /* Vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9D829E35DB5009711EA /* Vertex.metal */; };
+		F85CF6B72A054AB600321DCC /* plane.obj in Resources */ = {isa = PBXBuildFile; fileRef = F85CF6B12A054AB500321DCC /* plane.obj */; };
+		F85CF6B82A054AB600321DCC /* plane.mtl in Resources */ = {isa = PBXBuildFile; fileRef = F85CF6B22A054AB500321DCC /* plane.mtl */; };
+		F85CF6B92A054AB600321DCC /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = F85CF6B32A054AB500321DCC /* ground.png */; };
+		F85CF6BA2A054AB600321DCC /* barn-ground.png in Resources */ = {isa = PBXBuildFile; fileRef = F85CF6B52A054AB600321DCC /* barn-ground.png */; };
+		F85CF6BB2A054AB600321DCC /* lowpoly-barn-color.png in Resources */ = {isa = PBXBuildFile; fileRef = F85CF6B62A054AB600321DCC /* lowpoly-barn-color.png */; };
 		F86ED98A29E2FC2E000D9680 /* Viewport3DApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86ED98929E2FC2E000D9680 /* Viewport3DApp.swift */; };
 		F86ED98C29E2FC2E000D9680 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86ED98B29E2FC2E000D9680 /* ContentView.swift */; };
 		F86ED98E29E2FC2F000D9680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F86ED98D29E2FC2F000D9680 /* Assets.xcassets */; };
@@ -62,6 +67,11 @@
 		F85AA9CA29E3167A009711EA /* face_c.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face_c.jpg; sourceTree = "<group>"; };
 		F85AA9CB29E3167A009711EA /* body_lili.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = body_lili.jpg; sourceTree = "<group>"; };
 		F85AA9D829E35DB5009711EA /* Vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Vertex.metal; sourceTree = "<group>"; };
+		F85CF6B12A054AB500321DCC /* plane.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plane.obj; sourceTree = "<group>"; };
+		F85CF6B22A054AB500321DCC /* plane.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = plane.mtl; sourceTree = "<group>"; };
+		F85CF6B32A054AB500321DCC /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
+		F85CF6B52A054AB600321DCC /* barn-ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "barn-ground.png"; sourceTree = "<group>"; };
+		F85CF6B62A054AB600321DCC /* lowpoly-barn-color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lowpoly-barn-color.png"; sourceTree = "<group>"; };
 		F86ED98629E2FC2E000D9680 /* Viewport3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viewport3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F86ED98929E2FC2E000D9680 /* Viewport3DApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Viewport3DApp.swift; sourceTree = "<group>"; };
 		F86ED98B29E2FC2E000D9680 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,6 +129,8 @@
 		F85AA9A929E3160E009711EA /* Shared Data */ = {
 			isa = PBXGroup;
 			children = (
+				F85CF6B02A054AB500321DCC /* Ground */,
+				F85CF6B42A054AB600321DCC /* Textures */,
 				F85AA9C029E3167A009711EA /* Anime model */,
 			);
 			path = "Shared Data";
@@ -149,6 +161,25 @@
 				F8BC39BD2A01736300276B79 /* Mesh.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		F85CF6B02A054AB500321DCC /* Ground */ = {
+			isa = PBXGroup;
+			children = (
+				F85CF6B12A054AB500321DCC /* plane.obj */,
+				F85CF6B22A054AB500321DCC /* plane.mtl */,
+				F85CF6B32A054AB500321DCC /* ground.png */,
+			);
+			path = Ground;
+			sourceTree = "<group>";
+		};
+		F85CF6B42A054AB600321DCC /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				F85CF6B52A054AB600321DCC /* barn-ground.png */,
+				F85CF6B62A054AB600321DCC /* lowpoly-barn-color.png */,
+			);
+			path = Textures;
 			sourceTree = "<group>";
 		};
 		F86ED97D29E2FC2E000D9680 = {
@@ -361,12 +392,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F85AA9D029E3167A009711EA /* SVS61UZAH4OIDVNG1PSGCOM2D.mtl in Resources */,
+				F85CF6BA2A054AB600321DCC /* barn-ground.png in Resources */,
 				F85AA9D229E3167A009711EA /* acce_lili.jpg in Resources */,
+				F85CF6B82A054AB600321DCC /* plane.mtl in Resources */,
 				F85AA9CE29E3167A009711EA /* SVS61UZAH4OIDVNG1PSGCOM2D.obj in Resources */,
+				F85CF6BB2A054AB600321DCC /* lowpoly-barn-color.png in Resources */,
 				F85AA9CF29E3167A009711EA /* Visit RigModels.com.url in Resources */,
+				F85CF6B72A054AB600321DCC /* plane.obj in Resources */,
 				F85AA9CD29E3167A009711EA /* Convert.exe in Resources */,
 				F85AA9D329E3167A009711EA /* License.txt in Resources */,
 				F85AA9D429E3167A009711EA /* default-grey.jpg in Resources */,
+				F85CF6B92A054AB600321DCC /* ground.png in Resources */,
 				F85AA9D629E3167A009711EA /* body_lili.jpg in Resources */,
 				F85AA9CC29E3167A009711EA /* SVS61UZAH4OIDVNG1PSGCOM2D.jpg in Resources */,
 				F86ED98E29E2FC2F000D9680 /* Assets.xcassets in Resources */,
