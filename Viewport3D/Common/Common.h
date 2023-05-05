@@ -21,11 +21,16 @@ typedef struct {
     uint height;
 } ScreenParameters;
 
+typedef struct {
+    ScreenParameters screenParameters;
+    uint tiling;
+} RenderParameters;
+
 typedef enum {
     VertexBuffer = 0,
     UVBuffer = 1,
     UniformsBuffer = 11,
-    ScreenParametersBuffer = 12
+    RenderParametersBuffer = 12
 } BufferIndices;
 
 typedef enum {

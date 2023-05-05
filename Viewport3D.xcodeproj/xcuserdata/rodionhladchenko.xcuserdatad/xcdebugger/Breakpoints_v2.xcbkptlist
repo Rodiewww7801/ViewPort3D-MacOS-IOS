@@ -174,8 +174,8 @@
             filePath = "Viewport3D/Common/Renderers/Renderer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "draw(in:)"
             landmarkType = "7">
             <Locations>
@@ -222,9 +222,25 @@
             filePath = "Viewport3D/Common/Renderers/Renderer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "renderGroundModel(renderEncoder:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "04F86E5A-F1B2-4FD2-B10A-D73C393EF5B0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Viewport3D/Common/Renderers/Renderer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "draw(in:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

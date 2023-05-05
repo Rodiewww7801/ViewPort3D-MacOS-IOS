@@ -21,7 +21,7 @@ class Renderer: NSObject {
     private var depthStencilState: MTLDepthStencilState?
     private let metalView: MTKView
     private var uniforms: Uniforms = Uniforms()
-    private var screenParameters: ScreenParameters = ScreenParameters()
+    private var renderParameters: RenderParameters = RenderParameters()
 
     private let animeModelResourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
     private var timer: Float = 0.0
@@ -117,13 +117,12 @@ class Renderer: NSObject {
     }
 }
 
-// MARK: - Render
+// MARK: - Draw
 
 extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         setupFOV()
-        screenParameters.width = UInt32(size.width)
-        screenParameters.height = UInt32(size.height)
+        setupScreenParameters(size)
     }
     
     func draw(in view: MTKView) {
@@ -135,7 +134,6 @@ extension Renderer: MTKViewDelegate {
             print("[Renderer]: Coudn't render view")
             return
         }
-        setupScreenParameters(encoder: renderEncoder)
         setupViewPosition()
         
         switch renderOptions.renderChoise {
@@ -172,13 +170,18 @@ extension Renderer: MTKViewDelegate {
     
 // MARK: - Setup Scene
     
-    private func setupScreenParameters(encoder: MTLRenderCommandEncoder) {
-        encoder.setFragmentBytes(&screenParameters, length: MemoryLayout<ScreenParameters>.stride, index: ScreenParametersBuffer.index)
+    private func setupRenderParameters(encoder: MTLRenderCommandEncoder) {
+        encoder.setFragmentBytes(&renderParameters, length: MemoryLayout<RenderParameters>.stride, index: RenderParametersBuffer.index)
+    }
+    
+    private func setupScreenParameters(_ size: CGSize) {
+        renderParameters.screenParameters.width = UInt32(size.width)
+        renderParameters.screenParameters.height = UInt32(size.height)
     }
     
     private func setupFOV() {
         let aspect = Float(self.metalView.bounds.width) / Float(self.metalView.bounds.height)
-        let projectionMatrix = float4x4(projectionFov: Float(70), near: 0.1, far: 100, aspect: aspect)
+        let projectionMatrix = float4x4(projectionFov: Float(70).degreesToRadians, near: 0.1, far: 100, aspect: aspect)
         uniforms.projectionMatrix = projectionMatrix
     }
     
@@ -218,6 +221,7 @@ extension Renderer: MTKViewDelegate {
 // MARK: - Render functions
     
     private func renderQuad(renderEncoder: MTLRenderCommandEncoder) {
+        setupRenderParameters(encoder: renderEncoder)
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
     }
     
@@ -227,12 +231,20 @@ extension Renderer: MTKViewDelegate {
     }
     
     private func renderAnimeModel(renderEncoder: MTLRenderCommandEncoder) {
+        guard let animeModel = animeModel else { return }
         renderEncoder.setTriangleFillMode(.fill)
-        animeModel?.render(encoder: renderEncoder)
+        animeModel.tiling = UInt32(1)
+        renderParameters.tiling = animeModel.tiling
+        setupRenderParameters(encoder: renderEncoder)
+        animeModel.render(encoder: renderEncoder)
     }
     
     private func renderGroundModel(renderEncoder: MTLRenderCommandEncoder) {
-        groundModel?.render(encoder: renderEncoder)
+        guard let groundModel = groundModel else { return }
+        self.groundModel?.tiling = UInt32(16)
+        renderParameters.tiling = groundModel.tiling
+        setupRenderParameters(encoder: renderEncoder)
+        groundModel.render(encoder: renderEncoder)
     }
 }
 

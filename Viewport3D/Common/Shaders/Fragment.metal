@@ -12,9 +12,9 @@ using namespace metal;
 
 fragment float4 fragment_main(VertexOut vertexOut [[stage_in]],
                               texture2d<float> baseColorTexture [[texture(BaseColor)]],
-                              constant ScreenParameters &screenParameters [[buffer(ScreenParametersBuffer)]]) {
-    constexpr sampler textureSampler;
-    float3 baseColor = baseColorTexture.sample(textureSampler, vertexOut.uv).rgb;
+                              constant RenderParameters &fragmentParameters [[buffer(RenderParametersBuffer)]]) {
+    constexpr sampler textureSampler(filter:: linear, address:: mirrored_repeat, mip_filter::linear);
+    float3 baseColor = baseColorTexture.sample(textureSampler, vertexOut.uv * fragmentParameters.tiling).rgb;
     return float4(baseColor,1);
 }
 

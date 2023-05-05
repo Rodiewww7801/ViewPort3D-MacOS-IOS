@@ -58,7 +58,7 @@ extension Primitive {
         encoder.setVertexBytes(&matrix, length: MemoryLayout<matrix_float4x4>.stride, index: UniformsBuffer.index)
         
         color_1 = simd_float4(0,0,1,1)
-        encoder.setFragmentBytes(&color_1, length: MemoryLayout<simd_float4>.stride, index: ScreenParametersBuffer.index)
+        encoder.setFragmentBytes(&color_1, length: MemoryLayout<simd_float4>.stride, index: RenderParametersBuffer.index)
         
         encoder.drawIndexedPrimitives(
             type: .triangle,

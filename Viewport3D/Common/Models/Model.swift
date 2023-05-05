@@ -11,6 +11,7 @@ class Model: Transformable {
     let name: String
     var transform: Transform
     var meshes: [Mesh] = []
+    var tiling: UInt32 = 1
     
     private var timer: Float = 0.0
     
