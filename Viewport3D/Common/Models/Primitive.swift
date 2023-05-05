@@ -16,6 +16,8 @@ protocol Primitive {
 
 extension Primitive {
     func renderPrimitive(encoder: MTLRenderCommandEncoder) {
+        encoder.setTriangleFillMode(.fill)
+        
         let primitive = self
         
         encoder.setVertexBuffer(primitive.verticesBuffer, offset: 0, index: VertexBuffer.index)

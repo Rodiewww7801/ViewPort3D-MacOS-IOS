@@ -187,13 +187,11 @@ extension Renderer: MTKViewDelegate {
     }
     
     private func renderQuad(renderEncoder: MTLRenderCommandEncoder) {
-        renderEncoder.setTriangleFillMode(.fill)
         renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
     }
     
     private func renderPrimitive(renderEncoder: MTLRenderCommandEncoder) {
         guard let primitive = primitive else { return }
-        renderEncoder.setTriangleFillMode(.fill)
         primitive.renderPrimitive(encoder: renderEncoder)
     }
     

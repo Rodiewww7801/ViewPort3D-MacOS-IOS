@@ -50,6 +50,8 @@ extension Model {
     }
     
     func render(encoder: MTLRenderCommandEncoder) {
+        encoder.setTriangleFillMode(.fill)
+        
         // render meshes
         for mesh in meshes {
             for (index, mtkMeshVertexBuffer) in mesh.mtkMesh.vertexBuffers.enumerated() {
