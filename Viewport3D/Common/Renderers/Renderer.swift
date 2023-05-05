@@ -188,7 +188,7 @@ extension Renderer: MTKViewDelegate {
     private func setupViewPosition() {
         let translation = float4x4(translation: [0,1.3,-3]).inverse
         let sinTimer = sin(timer)
-        let rotation = float4x4(rotation: [Float(2).degreesToRadians, sinTimer, 0]).inverse
+        let rotation = float4x4(rotation: [0, sinTimer, 0]).inverse
         self.uniforms.viewMatrix = translation * rotation
     }
     
@@ -241,7 +241,7 @@ extension Renderer: MTKViewDelegate {
     
     private func renderGroundModel(renderEncoder: MTLRenderCommandEncoder) {
         guard let groundModel = groundModel else { return }
-        self.groundModel?.tiling = UInt32(16)
+        self.groundModel?.tiling = UInt32(32)
         renderParameters.tiling = groundModel.tiling
         setupRenderParameters(encoder: renderEncoder)
         groundModel.render(encoder: renderEncoder)
