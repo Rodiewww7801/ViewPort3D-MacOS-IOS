@@ -8,6 +8,8 @@
 import Foundation
 import MetalKit
 
+//abstract class
+
 protocol Primitive {
     var verticesBuffer: MTLBuffer {get set}
     var indicesBuffer: MTLBuffer {get set}

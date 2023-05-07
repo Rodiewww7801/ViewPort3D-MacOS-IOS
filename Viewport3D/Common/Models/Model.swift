@@ -42,8 +42,14 @@ class Model: Transformable {
 // MARK: - Render
 
 extension Model {    
-    func render(encoder: MTLRenderCommandEncoder) {
+    func render(encoder: MTLRenderCommandEncoder, uniforms: Uniforms ,renderParameters: RenderParameters) {
         encoder.setTriangleFillMode(.fill)
+        var uniforms = uniforms
+        var renderParameters = renderParameters
+        renderParameters.tiling = self.tiling
+        encoder.setFragmentBytes(&renderParameters, length: MemoryLayout<RenderParameters>.stride, index: RenderParametersBuffer.index)
+        uniforms.modelMatrix = self.transform.modelMatrix
+        encoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: UniformsBuffer.index)
         
         // render meshes
         for mesh in meshes {

@@ -20,14 +20,11 @@ class Renderer: NSObject {
     private var pipelineStateForPrimitive: MTLRenderPipelineState!
     private var depthStencilState: MTLDepthStencilState?
     private let metalView: MTKView
+    
     private var uniforms: Uniforms = Uniforms()
     private var renderParameters: RenderParameters = RenderParameters()
-
-    private let animeModelResourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
     private var timer: Float = 0.0
-    private var primitive: Primitive?
-    private var animeModel: Model?
-    private var groundModel: Model?
+    private var scene: EngineScene
     
     init(metalView: MTKView, renderOptions: RenderOptions) {
         guard
@@ -42,6 +39,7 @@ class Renderer: NSObject {
         self.metalView = metalView
         self.renderOptions = renderOptions
         self.depthStencilState = Renderer.buildDepthStencilState()
+        self.scene = EngineScene()
         
         super.init()
         
@@ -54,9 +52,7 @@ class Renderer: NSObject {
         uniforms.viewMatrix = .identity
         uniforms.projectionMatrix = .identity
         
-        AnimeModelLogicSetup()
-        groundModelLogicSetup()
-        quadLogicSetup()
+        self.modelLogicSetup()
         
         mtkView(metalView, drawableSizeWillChange: metalView.bounds.size)
     }
@@ -134,29 +130,25 @@ extension Renderer: MTKViewDelegate {
             print("[Renderer]: Coudn't render view")
             return
         }
+        
         setupViewPosition()
+        setupTimer()
         
         switch renderOptions.renderChoise {
         case .model:
             renderEncoder.setDepthStencilState(self.depthStencilState)
             renderEncoder.setRenderPipelineState(pipelineStateForModel)
             
-            setupTimer()
-            
-            setupTransformForAnimeModel()
-            setupUniform(renderEncoder: renderEncoder)
-            renderAnimeModel(renderEncoder: renderEncoder)
-            
-            setupTransformForGroundModel()
-            setupUniform(renderEncoder: renderEncoder)
-            renderGroundModel(renderEncoder: renderEncoder)
+            scene.update()
+            scene.models.forEach { model in
+                model.render(encoder: renderEncoder, uniforms: self.uniforms, renderParameters: self.renderParameters)
+            }
         case .primitive:
-            renderEncoder.setRenderPipelineState(pipelineStateForPrimitive)
-            renderQuad(renderEncoder: renderEncoder)
+            break
         default:
             break
         }
-
+        
         renderEncoder.endEncoding()
         
         guard let drawable = view.currentDrawable else {
@@ -168,11 +160,7 @@ extension Renderer: MTKViewDelegate {
         commandBuffer.commit()
     }
     
-// MARK: - Setup Scene
-    
-    private func setupRenderParameters(encoder: MTLRenderCommandEncoder) {
-        encoder.setFragmentBytes(&renderParameters, length: MemoryLayout<RenderParameters>.stride, index: RenderParametersBuffer.index)
-    }
+    // MARK: - Setup Scene
     
     private func setupScreenParameters(_ size: CGSize) {
         renderParameters.screenParameters.width = UInt32(size.width)
@@ -195,117 +183,15 @@ extension Renderer: MTKViewDelegate {
     private func setupTimer() {
         timer += 0.005
     }
-    
-    private func setupUniform(renderEncoder: MTLRenderCommandEncoder) {
-        renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: UniformsBuffer.index)
-    }
-    
-    private func setupTransformForAnimeModel() {
-        guard let model = animeModel else { return }
-        
-        model.transform.position = [0,1.3,0]
-        model.transform.rotation = [0, 0 + Float(-90).degreesToRadians , 0]
-        
-        uniforms.modelMatrix = model.transform.modelMatrix
-    }
-    
-    private func setupTransformForGroundModel() {
-        guard let groundModel = groundModel else { return }
-        
-        groundModel.transform.scale = 40
-        groundModel.transform.rotation = [0, 0, 0 ]
-        
-        uniforms.modelMatrix = groundModel.transform.modelMatrix
-    }
-    
-// MARK: - Render functions
-    
-    private func renderQuad(renderEncoder: MTLRenderCommandEncoder) {
-        setupRenderParameters(encoder: renderEncoder)
-        renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 6)
-    }
-    
-    private func renderPrimitive(renderEncoder: MTLRenderCommandEncoder) {
-        guard let primitive = primitive else { return }
-        primitive.renderPrimitive(encoder: renderEncoder)
-    }
-    
-    private func renderAnimeModel(renderEncoder: MTLRenderCommandEncoder) {
-        guard let animeModel = animeModel else { return }
-        renderEncoder.setTriangleFillMode(.fill)
-        animeModel.tiling = UInt32(1)
-        renderParameters.tiling = animeModel.tiling
-        setupRenderParameters(encoder: renderEncoder)
-        animeModel.render(encoder: renderEncoder)
-    }
-    
-    private func renderGroundModel(renderEncoder: MTLRenderCommandEncoder) {
-        guard let groundModel = groundModel else { return }
-        self.groundModel?.tiling = UInt32(64)
-        renderParameters.tiling = groundModel.tiling
-        setupRenderParameters(encoder: renderEncoder)
-        groundModel.render(encoder: renderEncoder)
-    }
 }
 
 // MARK: - Logic setup
 
 extension Renderer {
-    private func triangleLogicSetup() {
-        createLibrary()
-        createPipelineDescriptorForPrimitive()
-        createTriangle()
-        self.pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.primitiveDefaultLayout
-        createPipelineStateForPrimitive()
-    }
-    
-    private func sphereLogicSetup() {
-        createLibrary()
-        createPipelineDescriptorForPrimitive()
-        createSphere()
-        self.pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.primitiveDefaultLayout
-        createPipelineStateForPrimitive()
-    }
-    
-    private func quadLogicSetup() {
-        createLibrary()
-        createPipelineDescriptorForPrimitive()
-        createPipelineStateForPrimitive()
-    }
-    
     private func modelLogicSetup() {
         createLibrary()
         createPipelineDescriptorForModel()
         self.pipelineDescriptor.vertexDescriptor = MTLVertexDescriptor.modelDefaultLayout
         createPipelineStateForModel()
-    }
-    
-    private func AnimeModelLogicSetup() {
-        createAnimeModel()
-        modelLogicSetup()
-    }
-    
-    private func groundModelLogicSetup() {
-        self.groundModel = Model(device: Renderer.device, name: "plane")
-    }
-    
-    private func createSphere() {
-        let sphere = Sphere(device: Renderer.device, scale: 0.4)
-        self.primitive = sphere
-    }
-    
-    private func createTriangle() {
-        let triangle = Triangle(device: Renderer.device, scale: 0.5)
-        self.primitive = triangle
-    }
-    
-    private func createQuad() {
-        let quad = Quad(device: Renderer.device, scale: 0.5)
-        self.primitive = quad
-    }
-    
-    private func createAnimeModel() {
-        let model = Model(device: Renderer.device, name: animeModelResourceName)
-        self.animeModel = model
     }
 }
