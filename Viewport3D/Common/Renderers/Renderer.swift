@@ -23,7 +23,7 @@ class Renderer: NSObject {
     
     private var uniforms: Uniforms = Uniforms()
     private var renderParameters: RenderParameters = RenderParameters()
-    private var deltaTime: Float = 0.0
+    private var lastTime: Double = CFAbsoluteTimeGetCurrent()
     private var scene: EngineScene
     
     init(metalView: MTKView, renderOptions: RenderOptions) {
@@ -131,14 +131,15 @@ extension Renderer: MTKViewDelegate {
             return
         }
         
-        setupTimer()
+        let deltaTime = self.getDeltaTime()
         
         switch renderOptions.renderChoise {
         case .model:
             renderEncoder.setDepthStencilState(self.depthStencilState)
             renderEncoder.setRenderPipelineState(pipelineStateForModel)
             
-            scene.update(deltaTitme: self.deltaTime)
+            
+            scene.update(deltaTime: deltaTime)
             uniforms.viewMatrix = scene.camera.viewMatrix
             uniforms.projectionMatrix = scene.camera.projectionMatrix
             scene.models.forEach { model in
@@ -163,8 +164,11 @@ extension Renderer: MTKViewDelegate {
     
 // MARK: - Setup Scene
     
-    private func setupTimer() {
-        deltaTime += 0.005
+    private func getDeltaTime() -> Float {
+        let currentTime = CFAbsoluteTimeGetCurrent()
+        let deltaTime = Float(currentTime - lastTime)
+        lastTime = currentTime
+        return deltaTime
     }
 }
 

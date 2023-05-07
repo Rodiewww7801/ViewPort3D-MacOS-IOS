@@ -20,7 +20,7 @@ class FPSCamera: Camera {
     var viewMatrix: float4x4 {
         let rotationMatrix = float4x4(rotation: self.transform.rotation)
         let positionMatrix = float4x4(translation: self.transform.position)
-        return (rotationMatrix * positionMatrix).inverse
+        return (positionMatrix * rotationMatrix).inverse
     }
     
     init() {
@@ -36,6 +36,11 @@ class FPSCamera: Camera {
     }
     
     func update(deltaTime: Float) {
-        
+        let movement = self.updateInput(deltaTime: deltaTime)
+        self.transform.rotation += movement.rotation
     }
+}
+
+extension FPSCamera: Movable {
+    
 }

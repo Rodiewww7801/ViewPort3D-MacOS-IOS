@@ -8,29 +8,36 @@
 import Foundation
 
 class EngineScene {
-    var animeModel: Model!
-    var groundModel: Model!
     var models: [Model] = []
     var camera: FPSCamera
     
+    private var animeModel: Model!
+    private var groundModel: Model!
     private let animeModelResourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
     
     init() {
+        InputController.shared
         self.camera = FPSCamera()
         self.createAnimeModel()
         self.createGroundModel()
+        
+        setupCameraTransform(deltaTime: 0)
     }
     
     func update(size: CGSize) {
         self.camera.update(size: size)
     }
     
-    func update(deltaTitme: Float) {
-        self.camera.transform.rotation = [0, sin(deltaTitme), 0]
-        self.camera.transform.position = [0, 1.5, -3]
-        
+    func update(deltaTime: Float) {
+        camera.update(deltaTime: deltaTime)
+       
         setupTransformForGroundModel()
         setupTransformForAnimeModel()
+    }
+    
+    private func setupCameraTransform(deltaTime: Float) {
+        self.camera.transform.rotation = [0, sin(deltaTime), 0]
+        self.camera.transform.position = [0, 1.5, -3]
     }
     
     private func setupTransformForAnimeModel() {
@@ -43,7 +50,7 @@ class EngineScene {
         groundModel.transform.rotation = [0, 0, 0]
     }
     
-// MARK: - Logic setup
+// MARK: - Model Creation
     
     private func createGroundModel() {
         self.groundModel = Model(device: Renderer.device, name: "plane")

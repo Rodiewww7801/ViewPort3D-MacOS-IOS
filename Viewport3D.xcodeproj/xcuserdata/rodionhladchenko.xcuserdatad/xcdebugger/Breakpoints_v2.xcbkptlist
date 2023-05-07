@@ -312,19 +312,19 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "19FF0228-3B24-4F33-B2EC-3833818DEA71"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Viewport3D/Common/Renderers/Renderer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "draw(in:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "19FF0228-3B24-4F33-B2EC-3833818DEA71 - fd21ffc3466187dd"
+                  uuid = "19FF0228-3B24-4F33-B2EC-3833818DEA71 - fd21ffc346618638"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -334,12 +334,12 @@
                   urlString = "file:///Users/rodionhladchenko/Documents/my%20repos/MetalKitTutorials/ViewPort3D-MacOS-IOS/Viewport3D/Common/Renderers/Renderer.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "149"
-                  endingLineNumber = "149"
-                  offsetFromSymbolStart = "1056">
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "1564">
                </Location>
                <Location
-                  uuid = "19FF0228-3B24-4F33-B2EC-3833818DEA71 - f7402912d8133d04"
+                  uuid = "19FF0228-3B24-4F33-B2EC-3833818DEA71 - f7402912d8133caf"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -349,8 +349,8 @@
                   urlString = "file:///Users/rodionhladchenko/Documents/my%20repos/MetalKitTutorials/ViewPort3D-MacOS-IOS/Viewport3D/Common/Renderers/Renderer.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "150"
-                  endingLineNumber = "150"
+                  startingLineNumber = "145"
+                  endingLineNumber = "145"
                   offsetFromSymbolStart = "76">
                </Location>
             </Locations>
