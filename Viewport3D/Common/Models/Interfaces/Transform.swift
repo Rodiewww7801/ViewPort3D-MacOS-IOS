@@ -18,7 +18,7 @@ struct Transform {
 }
 
 extension Transform {
-    var modelMatrix: matrix_float4x4 {
+    var transformMatrix: matrix_float4x4 {
         let positionMatrix = matrix_float4x4(translation: self.position)
         let rotationMatrix = matrix_float4x4(rotation: self.rotation)
         let scaleMatrix = matrix_float4x4(scaling: self.scale)

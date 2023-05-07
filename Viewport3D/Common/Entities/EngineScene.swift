@@ -11,17 +11,24 @@ class EngineScene {
     var animeModel: Model!
     var groundModel: Model!
     var models: [Model] = []
-    
-    private var deltaTime: Float = 0.0
+    var camera: FPSCamera
     
     private let animeModelResourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
     
     init() {
+        self.camera = FPSCamera()
         self.createAnimeModel()
         self.createGroundModel()
     }
     
-    func update() {        
+    func update(size: CGSize) {
+        self.camera.update(size: size)
+    }
+    
+    func update(deltaTitme: Float) {
+        self.camera.transform.rotation = [0, sin(deltaTitme), 0]
+        self.camera.transform.position = [0, 1.5, -3]
+        
         setupTransformForGroundModel()
         setupTransformForAnimeModel()
     }

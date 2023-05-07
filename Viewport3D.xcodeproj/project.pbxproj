@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		F817497B29F06AE500EB1AA5 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = F817497A29F06AE500EB1AA5 /* Sphere.swift */; };
 		F83AD5F12A06753D00D7E50A /* EngineScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AD5F02A06753D00D7E50A /* EngineScene.swift */; };
+		F83AD5F42A080F1A00D7E50A /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AD5F32A080F1A00D7E50A /* Camera.swift */; };
+		F83AD5F62A0819AC00D7E50A /* FPSCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AD5F52A0819AC00D7E50A /* FPSCamera.swift */; };
 		F85AA9A129E308D8009711EA /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9A029E308D8009711EA /* Renderer.swift */; };
 		F85AA9A529E309B6009711EA /* MetalViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9A429E309B6009711EA /* MetalViewRepresentable.swift */; };
 		F85AA9A729E30C1B009711EA /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9A629E30C1B009711EA /* MetalView.swift */; };
@@ -54,6 +56,8 @@
 /* Begin PBXFileReference section */
 		F817497A29F06AE500EB1AA5 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 		F83AD5F02A06753D00D7E50A /* EngineScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineScene.swift; sourceTree = "<group>"; };
+		F83AD5F32A080F1A00D7E50A /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		F83AD5F52A0819AC00D7E50A /* FPSCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPSCamera.swift; sourceTree = "<group>"; };
 		F85AA99F29E3028C009711EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F85AA9A029E308D8009711EA /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		F85AA9A429E309B6009711EA /* MetalViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewRepresentable.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 			children = (
 				F8BC39BB2A016E3D00276B79 /* Submesh.swift */,
 				F8BC39BD2A01736300276B79 /* Mesh.swift */,
+				F83AD5F02A06753D00D7E50A /* EngineScene.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -290,7 +295,7 @@
 				F817497A29F06AE500EB1AA5 /* Sphere.swift */,
 				F872891D29F6EA2800B70AC4 /* Primitive.swift */,
 				F87C9DD429FD1DE3006ED0DE /* Model.swift */,
-				F83AD5F02A06753D00D7E50A /* EngineScene.swift */,
+				F83AD5F52A0819AC00D7E50A /* FPSCamera.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -332,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				F89F10AF29FFC86800932551 /* Transform.swift */,
+				F83AD5F32A080F1A00D7E50A /* Camera.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -461,7 +467,9 @@
 				F8BC39BE2A01736300276B79 /* Mesh.swift in Sources */,
 				F8BC39C02A017ECE00276B79 /* Common + Extensions.swift in Sources */,
 				F872891C29F6E77B00B70AC4 /* Triangle.swift in Sources */,
+				F83AD5F62A0819AC00D7E50A /* FPSCamera.swift in Sources */,
 				F83AD5F12A06753D00D7E50A /* EngineScene.swift in Sources */,
+				F83AD5F42A080F1A00D7E50A /* Camera.swift in Sources */,
 				F85AA9A129E308D8009711EA /* Renderer.swift in Sources */,
 				F872891A29F6CC9600B70AC4 /* GridView.swift in Sources */,
 				F86ED98A29E2FC2E000D9680 /* Viewport3DApp.swift in Sources */,

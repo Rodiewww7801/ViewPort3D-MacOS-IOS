@@ -23,7 +23,7 @@ class Renderer: NSObject {
     
     private var uniforms: Uniforms = Uniforms()
     private var renderParameters: RenderParameters = RenderParameters()
-    private var timer: Float = 0.0
+    private var deltaTime: Float = 0.0
     private var scene: EngineScene
     
     init(metalView: MTKView, renderOptions: RenderOptions) {
@@ -113,12 +113,12 @@ class Renderer: NSObject {
     }
 }
 
-// MARK: - Draw
+// MARK: - Render
 
 extension Renderer: MTKViewDelegate {
+    
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        setupFOV()
-        setupScreenParameters(size)
+        scene.update(size: size)
     }
     
     func draw(in view: MTKView) {
@@ -131,7 +131,6 @@ extension Renderer: MTKViewDelegate {
             return
         }
         
-        setupViewPosition()
         setupTimer()
         
         switch renderOptions.renderChoise {
@@ -139,7 +138,9 @@ extension Renderer: MTKViewDelegate {
             renderEncoder.setDepthStencilState(self.depthStencilState)
             renderEncoder.setRenderPipelineState(pipelineStateForModel)
             
-            scene.update()
+            scene.update(deltaTitme: self.deltaTime)
+            uniforms.viewMatrix = scene.camera.viewMatrix
+            uniforms.projectionMatrix = scene.camera.projectionMatrix
             scene.models.forEach { model in
                 model.render(encoder: renderEncoder, uniforms: self.uniforms, renderParameters: self.renderParameters)
             }
@@ -160,34 +161,17 @@ extension Renderer: MTKViewDelegate {
         commandBuffer.commit()
     }
     
-    // MARK: - Setup Scene
-    
-    private func setupScreenParameters(_ size: CGSize) {
-        renderParameters.screenParameters.width = UInt32(size.width)
-        renderParameters.screenParameters.height = UInt32(size.height)
-    }
-    
-    private func setupFOV() {
-        let aspect = Float(self.metalView.bounds.width) / Float(self.metalView.bounds.height)
-        let projectionMatrix = float4x4(projectionFov: Float(70).degreesToRadians, near: 0.1, far: 100, aspect: aspect)
-        uniforms.projectionMatrix = projectionMatrix
-    }
-    
-    private func setupViewPosition() {
-        let translation = float4x4(translation: [0,1.3,-3]).inverse
-        let sinTimer = sin(timer)
-        let rotation = float4x4(rotation: [0, sinTimer, 0]).inverse
-        self.uniforms.viewMatrix = translation * rotation
-    }
+// MARK: - Setup Scene
     
     private func setupTimer() {
-        timer += 0.005
+        deltaTime += 0.005
     }
 }
 
 // MARK: - Logic setup
 
 extension Renderer {
+    
     private func modelLogicSetup() {
         createLibrary()
         createPipelineDescriptorForModel()

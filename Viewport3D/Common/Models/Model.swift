@@ -48,7 +48,7 @@ extension Model {
         var renderParameters = renderParameters
         renderParameters.tiling = self.tiling
         encoder.setFragmentBytes(&renderParameters, length: MemoryLayout<RenderParameters>.stride, index: RenderParametersBuffer.index)
-        uniforms.modelMatrix = self.transform.modelMatrix
+        uniforms.modelMatrix = self.transform.transformMatrix
         encoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: UniformsBuffer.index)
         
         // render meshes
