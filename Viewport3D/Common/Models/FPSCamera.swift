@@ -9,10 +9,10 @@ import Foundation
 
 class FPSCamera: Camera {    
     var transform: Transform
-    var aspect: Float
-    var fov: Float
-    var near: Float
-    var far: Float
+    private var aspect: Float
+    private var fov: Float
+    private var near: Float
+    private var far: Float
     
     var projectionMatrix: float4x4 {
         return float4x4(projectionFov: fov, near: near, far: far, aspect: aspect)
@@ -38,6 +38,7 @@ class FPSCamera: Camera {
     func update(deltaTime: Float) {
         let movement = self.updateInput(deltaTime: deltaTime)
         self.transform.rotation += movement.rotation
+        self.transform.position += movement.position
     }
 }
 

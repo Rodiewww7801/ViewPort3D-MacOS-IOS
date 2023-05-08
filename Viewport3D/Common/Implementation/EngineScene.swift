@@ -8,8 +8,10 @@
 import Foundation
 
 class EngineScene {
+    typealias CameraType = OrthographicCamera
+    
     var models: [Model] = []
-    var camera: FPSCamera
+    var camera: CameraType
     
     private var animeModel: Model!
     private var groundModel: Model!
@@ -17,7 +19,7 @@ class EngineScene {
     
     init() {
         InputController.shared
-        self.camera = FPSCamera()
+        self.camera = CameraType()
         self.createAnimeModel()
         self.createGroundModel()
         
@@ -36,8 +38,16 @@ class EngineScene {
     }
     
     private func setupCameraTransform(deltaTime: Float) {
-        self.camera.transform.rotation = [0, sin(deltaTime), 0]
-        self.camera.transform.position = [0, 1.5, -3]
+
+        
+//        self.camera.transform.rotation = [0, sin(deltaTime), 0]
+//        self.camera.transform.position = [0, 1.5, -3]
+//        self.camera.distance = length(camera.transform.position)
+//        self.camera.target = [0, 1.2, 0]
+        
+        // otrtographic setup
+        self.camera.transform.position = [0, -1.5, 0]
+        self.camera.transform.rotation.x = .pi / 2
     }
     
     private func setupTransformForAnimeModel() {

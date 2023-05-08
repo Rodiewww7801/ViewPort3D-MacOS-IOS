@@ -13,6 +13,8 @@
 		F83AD5F62A0819AC00D7E50A /* FPSCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AD5F52A0819AC00D7E50A /* FPSCamera.swift */; };
 		F83AD5F82A0829A000D7E50A /* InputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AD5F72A0829A000D7E50A /* InputController.swift */; };
 		F83AD5FD2A083CEC00D7E50A /* Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AD5FC2A083CEC00D7E50A /* Movement.swift */; };
+		F83AD5FF2A08657A00D7E50A /* ArcballCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AD5FE2A08657A00D7E50A /* ArcballCamera.swift */; };
+		F83AD6012A0980BE00D7E50A /* OrthographicCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AD6002A0980BE00D7E50A /* OrthographicCamera.swift */; };
 		F85AA9A129E308D8009711EA /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9A029E308D8009711EA /* Renderer.swift */; };
 		F85AA9A529E309B6009711EA /* MetalViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9A429E309B6009711EA /* MetalViewRepresentable.swift */; };
 		F85AA9A729E30C1B009711EA /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AA9A629E30C1B009711EA /* MetalView.swift */; };
@@ -62,6 +64,8 @@
 		F83AD5F52A0819AC00D7E50A /* FPSCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPSCamera.swift; sourceTree = "<group>"; };
 		F83AD5F72A0829A000D7E50A /* InputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputController.swift; sourceTree = "<group>"; };
 		F83AD5FC2A083CEC00D7E50A /* Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movement.swift; sourceTree = "<group>"; };
+		F83AD5FE2A08657A00D7E50A /* ArcballCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcballCamera.swift; sourceTree = "<group>"; };
+		F83AD6002A0980BE00D7E50A /* OrthographicCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrthographicCamera.swift; sourceTree = "<group>"; };
 		F85AA99F29E3028C009711EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F85AA9A029E308D8009711EA /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		F85AA9A429E309B6009711EA /* MetalViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewRepresentable.swift; sourceTree = "<group>"; };
@@ -307,6 +311,8 @@
 				F817497A29F06AE500EB1AA5 /* Sphere.swift */,
 				F87C9DD429FD1DE3006ED0DE /* Model.swift */,
 				F83AD5F52A0819AC00D7E50A /* FPSCamera.swift */,
+				F83AD5FE2A08657A00D7E50A /* ArcballCamera.swift */,
+				F83AD6002A0980BE00D7E50A /* OrthographicCamera.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -474,8 +480,10 @@
 				F89F10B429FFE92B00932551 /* Fragment.metal in Sources */,
 				F8D5358829E7580F00CCB8D2 /* VertexDescriptor + Extension.swift in Sources */,
 				F85AA9A529E309B6009711EA /* MetalViewRepresentable.swift in Sources */,
+				F83AD5FF2A08657A00D7E50A /* ArcballCamera.swift in Sources */,
 				F8BC39BC2A016E3D00276B79 /* Submesh.swift in Sources */,
 				F86ED98C29E2FC2E000D9680 /* ContentView.swift in Sources */,
+				F83AD6012A0980BE00D7E50A /* OrthographicCamera.swift in Sources */,
 				F8BC39B92A01667600276B79 /* TextureController.swift in Sources */,
 				F85AA9A729E30C1B009711EA /* MetalView.swift in Sources */,
 				F872891E29F6EA2800B70AC4 /* Primitive.swift in Sources */,
