@@ -14,6 +14,7 @@ struct ContentView: View {
     private let aspectRenderPreviews: CGFloat = 0.2
     
     @State private var showGrid = false
+    @State private var showPreviews = true
     
     var body: some View {
         VStack {
@@ -27,16 +28,18 @@ struct ContentView: View {
                     GridView()
                 }
                 
-                GeometryReader { geomentry in
-                    ScrollView(showsIndicators: false) {
-                        ForEach(RenderChoise.allCases, id: \.self) { choise in
-                            if choise == renderOptions.renderChoise {
-                                EmptyView()
-                            } else {
-                                MetalView(renderOptions: RenderOptions(renderChoise: choise))
-                                    .frame(width: geomentry.size.width * aspectRenderPreviews,
-                                           height: geomentry.size.height * aspectRenderPreviews)
-                                    .border(.black)
+                if showPreviews {
+                    GeometryReader { geomentry in
+                        ScrollView(showsIndicators: false) {
+                            ForEach(RenderChoise.allCases, id: \.self) { choise in
+                                if choise == renderOptions.renderChoise {
+                                    EmptyView()
+                                } else {
+                                    MetalView(renderOptions: RenderOptions(renderChoise: choise))
+                                        .frame(width: geomentry.size.width * aspectRenderPreviews,
+                                               height: geomentry.size.height * aspectRenderPreviews)
+                                        .border(.black)
+                                }
                             }
                         }
                     }
@@ -48,6 +51,7 @@ struct ContentView: View {
                 VStack(alignment: .leading) {
                     Text("Settings").bold()
                     Toggle("Show grid", isOn: $showGrid)
+                    Toggle("Show scene previews", isOn: $showPreviews)
                     Picker("Render options:", selection: $renderOptions.renderChoise, content: {
                         ForEach(RenderChoise.allCases, id: \.rawValue) { renderChoise in
                             Text("\(renderChoise.getName)").tag(renderChoise)
