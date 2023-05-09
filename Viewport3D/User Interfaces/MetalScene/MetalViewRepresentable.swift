@@ -38,14 +38,13 @@ struct MetalViewRepresentable: ViewRepresentable {
 #endif
     
     private func updateMetalView() {
-        renderer?.renderOptions  = renderOptions
+        renderer?.updateMetalView(with: renderOptions)
     }
 }
 
 struct ContentRepresentable_Previews: PreviewProvider {
     static var previews: some View {
-        let renderOptions = RenderOptions()
-        renderOptions.renderChoise = .model
+        let renderOptions = RenderOptions(renderChoise: .mainScene)
         return MetalView(renderOptions: renderOptions)
     }
 }

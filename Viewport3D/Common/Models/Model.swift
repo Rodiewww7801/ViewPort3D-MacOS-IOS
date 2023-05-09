@@ -43,7 +43,6 @@ class Model: Transformable {
 
 extension Model {    
     func render(encoder: MTLRenderCommandEncoder, uniforms: Uniforms ,renderParameters: RenderParameters) {
-        encoder.setTriangleFillMode(.fill)
         var uniforms = uniforms
         var renderParameters = renderParameters
         renderParameters.tiling = self.tiling

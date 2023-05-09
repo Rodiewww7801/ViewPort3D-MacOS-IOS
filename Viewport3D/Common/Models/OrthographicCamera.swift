@@ -10,7 +10,7 @@ import Foundation
 class OrthographicCamera: Camera, Movable {
     var transform: Transform
     var aspect: CGFloat = 1
-    var viewSize: CGFloat = 10
+    var viewSize: CGFloat = 2
     var near: Float = 0.1
     var far: Float = 100
     

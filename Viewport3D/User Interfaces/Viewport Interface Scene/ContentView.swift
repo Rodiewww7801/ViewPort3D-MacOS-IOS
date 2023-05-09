@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var renderOptions: RenderOptions = RenderOptions(renderChoise: .mainScene)
     private let originalColor = Color(red: 0.8, green: 0.8, blue: 0.8)
     private let size: CGFloat = 400
-    @ObservedObject var renderOptions: RenderOptions = RenderOptions()
+    private let aspectRenderPreviews: CGFloat = 0.2
     
     @State private var showGrid = false
     
@@ -19,8 +20,26 @@ struct ContentView: View {
             ZStack(alignment: .center) {
                 MetalView(renderOptions: renderOptions)
                     .border(Color(.black), width: 0.5)
+#if os(macOS)
+                    .frame(minWidth: 480, minHeight: 480)
+#endif
                 if showGrid {
                     GridView()
+                }
+                
+                GeometryReader { geomentry in
+                    ScrollView(showsIndicators: false) {
+                        ForEach(RenderChoise.allCases, id: \.self) { choise in
+                            if choise == renderOptions.renderChoise {
+                                EmptyView()
+                            } else {
+                                MetalView(renderOptions: RenderOptions(renderChoise: choise))
+                                    .frame(width: geomentry.size.width * aspectRenderPreviews,
+                                           height: geomentry.size.height * aspectRenderPreviews)
+                                    .border(.black)
+                            }
+                        }
+                    }
                 }
             }
             .border(.black)
@@ -30,8 +49,10 @@ struct ContentView: View {
                     Text("Settings").bold()
                     Toggle("Show grid", isOn: $showGrid)
                     Picker("Render options:", selection: $renderOptions.renderChoise, content: {
-                        Text("Model").tag(RenderChoise.model)
-                        Text("Texture").tag(RenderChoise.primitive)
+                        ForEach(RenderChoise.allCases, id: \.rawValue) { renderChoise in
+                            Text("\(renderChoise.getName)").tag(renderChoise)
+                        }
+                        
                     })
                 }.frame(maxWidth: .infinity)
             }
