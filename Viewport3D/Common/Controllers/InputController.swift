@@ -15,7 +15,7 @@ class InputController {
     var mouseDelta: CGPoint = .zero
     var mouseScroll: CGPoint = .zero
     
-    private init() {
+    func addObservers() {
         NotificationCenter.default.addObserver(forName: .GCKeyboardDidConnect, object: nil, queue: nil) { notification in
             let keyboard = notification.object as? GCKeyboard
             keyboard?.keyboardInput?.keyChangedHandler = { _,_,keyCode, pressed in
@@ -42,6 +42,18 @@ class InputController {
                 self.mouseScroll.y = CGFloat(yValue)
             }
         }
+    }
+    
+    func removeObservers() {
+        NotificationCenter.default.removeObserver(self, name: .GCKeyboardDidConnect, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .GCMouseDidConnect, object: nil)
+        self.leftMouseDown = false
+    }
+    
+    private init() {
+    
+        // todo: manage how to scroll in current view
+        self.addObservers()
         
 #if os(macOS)
             NSEvent.addLocalMonitorForEvents(matching: [.keyUp, .keyDown]) { _ in nil }

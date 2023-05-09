@@ -46,15 +46,13 @@ class ArcballCamera: Camera {
     
     func update(deltaTime: Float) {
         let input = InputController.shared
-        let scrollSensitivity = Movement.Settings.mouseScrollSensitivity
-        distance -= (Float(input.mouseScroll.x) + Float(input.mouseScroll.y)) * scrollSensitivity
+        distance -= (Float(input.mouseScroll.x) + Float(input.mouseScroll.y)) * Movement.Settings.mouseScrollSensitivity
         distance = min(maxDistance, max(minDistance, distance))
         input.mouseScroll = .zero
         
         if input.leftMouseDown {
-            let sensitivity = Movement.Settings.mousePanSensitivity
-            transform.rotation.x += Float(input.mouseDelta.y) * sensitivity
-            transform.rotation.y += Float(input.mouseDelta.x) * sensitivity
+            transform.rotation.x += Float(input.mouseDelta.y) * Movement.Settings.mousePanSensitivity
+            transform.rotation.y += Float(input.mouseDelta.x) * Movement.Settings.mousePanSensitivity
             transform.rotation.x = max(-.pi / 2, min(transform.rotation.x, .pi / 2))
             input.mouseDelta = .zero
         }

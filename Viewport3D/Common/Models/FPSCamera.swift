@@ -18,7 +18,7 @@ class FPSCamera: Camera {
         return float4x4(projectionFov: fov, near: near, far: far, aspect: aspect)
     }
     var viewMatrix: float4x4 {
-        let rotationMatrix = float4x4(rotation: self.transform.rotation)
+        let rotationMatrix = float4x4(rotationYXZ: [-self.transform.rotation.x, self.transform.rotation.y, 0])
         let positionMatrix = float4x4(translation: self.transform.position)
         return (positionMatrix * rotationMatrix).inverse
     }
@@ -39,6 +39,14 @@ class FPSCamera: Camera {
         let movement = self.updateInput(deltaTime: deltaTime)
         self.transform.rotation += movement.rotation
         self.transform.position += movement.position
+        
+        let input = InputController.shared
+        
+        transform.rotation.x += Float(input.mouseDelta.y) * Movement.Settings.mousePanSensitivity
+        transform.rotation.y += Float(input.mouseDelta.x) * Movement.Settings.mousePanSensitivity
+        transform.rotation.x = max(-.pi / 2, min(transform.rotation.x, .pi / 2))
+        input.mouseDelta = .zero
+        
     }
 }
 
