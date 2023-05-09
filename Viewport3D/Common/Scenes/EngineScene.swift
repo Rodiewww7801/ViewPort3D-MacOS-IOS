@@ -8,18 +8,18 @@
 import Foundation
 
 class EngineScene {
-    typealias CameraType = FPSCamera
-    
+    typealias CameraType = Camera
     var models: [Model] = []
-    var camera: CameraType
+    var camera: CameraType!
     
     private var animeModel: Model!
     private var groundModel: Model!
     private let animeModelResourceName: String = "SVS61UZAH4OIDVNG1PSGCOM2D"
     
-    init() {
-        InputController.shared
-        self.camera = CameraType()
+    init(camera: CameraType) {
+        InputController.shared // todo: remove
+        
+        self.camera = camera
         self.createAnimeModel()
         self.createGroundModel()
         
@@ -36,7 +36,7 @@ class EngineScene {
         camera.update(deltaTime: deltaTime)
     }
     
-    private func setupCameraTransform(deltaTime: Float) {
+    func setupCameraTransform(deltaTime: Float) {
         //fps camera
         self.camera.transform.rotation = [0, sin(deltaTime), 0]
         self.camera.transform.position = [0, 2, -3]

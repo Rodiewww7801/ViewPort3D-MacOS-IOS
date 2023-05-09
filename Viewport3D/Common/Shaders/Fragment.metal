@@ -13,6 +13,10 @@ using namespace metal;
 fragment float4 fragment_main(VertexOut vertexOut [[stage_in]],
                               texture2d<float> baseColorTexture [[texture(BaseColor)]],
                               constant RenderParameters &fragmentParameters [[buffer(RenderParametersBuffer)]]) {
+    if (fragmentParameters.isRenderVertex == 1) {
+        return float4(0,0,1,1);
+    }
+    
     constexpr sampler textureSampler(filter:: linear,
                                      address:: mirrored_repeat,
                                      mip_filter::linear,

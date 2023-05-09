@@ -24,6 +24,7 @@ typedef struct {
 typedef struct {
     ScreenParameters screenParameters;
     uint tiling;
+    uint isRenderVertex;
 } RenderParameters;
 
 typedef enum {

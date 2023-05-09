@@ -39,8 +39,7 @@ class Renderer: NSObject {
         self.metalView = metalView
         self.renderOptions = renderOptions
         self.depthStencilState = Renderer.buildDepthStencilState()
-        self.scene = EngineScene()
-        
+        self.scene = Renderer.getScene(renderChoise: renderOptions.renderChoise)
         super.init()
         
         metalView.device = Renderer.device
@@ -55,6 +54,27 @@ class Renderer: NSObject {
         self.modelLogicSetup()
         
         mtkView(metalView, drawableSizeWillChange: metalView.bounds.size)
+    }
+    
+    deinit {
+        print("[Renderer] deinit")
+    }
+    
+    static func getScene(renderChoise: RenderChoise) -> EngineScene {
+        var scene: EngineScene
+        switch renderChoise {
+        case .mainScene:
+            scene = MainScene()
+        case .vertexScene:
+            scene = ArcballScene()
+        case .frontOrtigraphic:
+            scene = FrontOrtigraphicScene()
+        case .leftOrtographic:
+            scene = LeftOrtographicScene()
+        case .topOrtographic:
+            scene = TopOrtographicScenes()
+        }
+        return scene
     }
     
     static func buildDepthStencilState() -> MTLDepthStencilState? {
@@ -111,6 +131,12 @@ class Renderer: NSObject {
             fatalError("\(error)")
         }
     }
+    
+    func updateMetalView(with renderOptions: RenderOptions) {
+        self.renderOptions = renderOptions
+        self.scene = Renderer.getScene(renderChoise: renderOptions.renderChoise)
+        mtkView(metalView, drawableSizeWillChange: metalView.bounds.size)
+    }
 }
 
 // MARK: - Render
@@ -133,22 +159,25 @@ extension Renderer: MTKViewDelegate {
         
         let deltaTime = self.getDeltaTime()
         
-        switch renderOptions.renderChoise {
-        case .model:
-            renderEncoder.setDepthStencilState(self.depthStencilState)
-            renderEncoder.setRenderPipelineState(pipelineStateForModel)
-            
-            
-            scene.update(deltaTime: deltaTime)
-            uniforms.viewMatrix = scene.camera.viewMatrix
-            uniforms.projectionMatrix = scene.camera.projectionMatrix
-            scene.models.forEach { model in
-                model.render(encoder: renderEncoder, uniforms: self.uniforms, renderParameters: self.renderParameters)
-            }
-        case .primitive:
-            break
-        default:
-            break
+        
+        
+        if renderOptions.renderChoise == .vertexScene {
+            renderParameters.isRenderVertex = UInt32(1)
+            renderEncoder.setTriangleFillMode(.lines)
+        } else {
+            renderParameters.isRenderVertex = UInt32(0)
+            renderEncoder.setTriangleFillMode(.fill)
+        }
+        
+        renderEncoder.setDepthStencilState(self.depthStencilState)
+        renderEncoder.setRenderPipelineState(pipelineStateForModel)
+        
+        
+        scene.update(deltaTime: deltaTime)
+        uniforms.viewMatrix = scene.camera.viewMatrix
+        uniforms.projectionMatrix = scene.camera.projectionMatrix
+        scene.models.forEach { model in
+            model.render(encoder: renderEncoder, uniforms: self.uniforms, renderParameters: self.renderParameters)
         }
         
         renderEncoder.endEncoding()
@@ -162,7 +191,7 @@ extension Renderer: MTKViewDelegate {
         commandBuffer.commit()
     }
     
-// MARK: - Setup Scene
+    // MARK: - Setup Scene
     
     private func getDeltaTime() -> Float {
         let currentTime = CFAbsoluteTimeGetCurrent()

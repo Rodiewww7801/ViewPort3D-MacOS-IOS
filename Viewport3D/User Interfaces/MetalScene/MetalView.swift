@@ -17,9 +17,6 @@ struct MetalView: View {
     
     var body: some View {
         MetalViewRepresentable(metalView: $metalView, renderer: renderer, renderOptions: renderOptions)
-#if os(macOS)
-                .frame(minWidth: 480, minHeight: 480)
-#endif
             .onAppear {
                 self.renderer = Renderer(metalView: metalView, renderOptions: renderOptions)
             }
@@ -28,8 +25,7 @@ struct MetalView: View {
 
 struct MetalView_Previews: PreviewProvider {
     static var previews: some View {
-        let renderOptions = RenderOptions()
-        renderOptions.renderChoise = .model
+        let renderOptions = RenderOptions(renderChoise: .mainScene)
         return MetalView(renderOptions: renderOptions)
     }
 }

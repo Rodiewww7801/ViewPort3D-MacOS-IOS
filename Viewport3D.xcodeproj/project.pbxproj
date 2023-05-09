@@ -50,6 +50,11 @@
 		F89F10B229FFE7A400932551 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B129FFE7A400932551 /* Options.swift */; };
 		F89F10B429FFE92B00932551 /* Fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = F89F10B329FFE92B00932551 /* Fragment.metal */; };
 		F8B331E12A0A817E00E1348E /* Window + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B331E02A0A817E00E1348E /* Window + Extension.swift */; };
+		F8B331E62A0AC79700E1348E /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B331E52A0AC79700E1348E /* MainScene.swift */; };
+		F8B331E82A0AC82E00E1348E /* FrontOrtigraphicScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B331E72A0AC82E00E1348E /* FrontOrtigraphicScene.swift */; };
+		F8B331EA2A0AC83D00E1348E /* LeftOrtographicScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B331E92A0AC83D00E1348E /* LeftOrtographicScene.swift */; };
+		F8B331EC2A0AC88A00E1348E /* TopOrtographicScenes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B331EB2A0AC88A00E1348E /* TopOrtographicScenes.swift */; };
+		F8B331EE2A0AC94E00E1348E /* ArcballScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B331ED2A0AC94E00E1348E /* ArcballScene.swift */; };
 		F8BC39B92A01667600276B79 /* TextureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BC39B82A01667600276B79 /* TextureController.swift */; };
 		F8BC39BC2A016E3D00276B79 /* Submesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BC39BB2A016E3D00276B79 /* Submesh.swift */; };
 		F8BC39BE2A01736300276B79 /* Mesh.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BC39BD2A01736300276B79 /* Mesh.swift */; };
@@ -106,6 +111,11 @@
 		F89F10B329FFE92B00932551 /* Fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Fragment.metal; sourceTree = "<group>"; };
 		F89F10B52A003F3D00932551 /* ShaderDefenitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderDefenitions.h; sourceTree = "<group>"; };
 		F8B331E02A0A817E00E1348E /* Window + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Window + Extension.swift"; sourceTree = "<group>"; };
+		F8B331E52A0AC79700E1348E /* MainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
+		F8B331E72A0AC82E00E1348E /* FrontOrtigraphicScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontOrtigraphicScene.swift; sourceTree = "<group>"; };
+		F8B331E92A0AC83D00E1348E /* LeftOrtographicScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftOrtographicScene.swift; sourceTree = "<group>"; };
+		F8B331EB2A0AC88A00E1348E /* TopOrtographicScenes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopOrtographicScenes.swift; sourceTree = "<group>"; };
+		F8B331ED2A0AC94E00E1348E /* ArcballScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcballScene.swift; sourceTree = "<group>"; };
 		F8BC39B82A01667600276B79 /* TextureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureController.swift; sourceTree = "<group>"; };
 		F8BC39BB2A016E3D00276B79 /* Submesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Submesh.swift; sourceTree = "<group>"; };
 		F8BC39BD2A01736300276B79 /* Mesh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mesh.swift; sourceTree = "<group>"; };
@@ -139,6 +149,11 @@
 			isa = PBXGroup;
 			children = (
 				F83AD5F02A06753D00D7E50A /* EngineScene.swift */,
+				F8B331E52A0AC79700E1348E /* MainScene.swift */,
+				F8B331ED2A0AC94E00E1348E /* ArcballScene.swift */,
+				F8B331E72A0AC82E00E1348E /* FrontOrtigraphicScene.swift */,
+				F8B331E92A0AC83D00E1348E /* LeftOrtographicScene.swift */,
+				F8B331EB2A0AC88A00E1348E /* TopOrtographicScenes.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -476,6 +491,7 @@
 				F87C9DD329FC791D006ED0DE /* MathLibrary.swift in Sources */,
 				F89F10B229FFE7A400932551 /* Options.swift in Sources */,
 				F872892029F6FCBB00B70AC4 /* Color + Extension.swift in Sources */,
+				F8B331E82A0AC82E00E1348E /* FrontOrtigraphicScene.swift in Sources */,
 				F83AD5F82A0829A000D7E50A /* InputController.swift in Sources */,
 				F8D5358229E60BBA00CCB8D2 /* Quad.swift in Sources */,
 				F89F10B029FFC86800932551 /* Transform.swift in Sources */,
@@ -499,8 +515,12 @@
 				F83AD5F42A080F1A00D7E50A /* Camera.swift in Sources */,
 				F83AD5FD2A083CEC00D7E50A /* Movement.swift in Sources */,
 				F85AA9A129E308D8009711EA /* Renderer.swift in Sources */,
+				F8B331EA2A0AC83D00E1348E /* LeftOrtographicScene.swift in Sources */,
+				F8B331E62A0AC79700E1348E /* MainScene.swift in Sources */,
+				F8B331EE2A0AC94E00E1348E /* ArcballScene.swift in Sources */,
 				F872891A29F6CC9600B70AC4 /* GridView.swift in Sources */,
 				F86ED98A29E2FC2E000D9680 /* Viewport3DApp.swift in Sources */,
+				F8B331EC2A0AC88A00E1348E /* TopOrtographicScenes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
