@@ -36,6 +36,14 @@ extension Movable {
             transform.rotation.y += rotationAmount
         }
         
+        if input.contains(.downArrow) {
+            transform.rotation.x -= rotationAmount
+        }
+        
+        if input.contains(.upArrow) {
+            transform.rotation.x += rotationAmount
+        }
+        
         if input.contains(.keyW) {
             direction.z += 1
         }

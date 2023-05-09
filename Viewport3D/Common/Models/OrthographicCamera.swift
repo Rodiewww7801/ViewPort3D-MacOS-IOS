@@ -24,8 +24,8 @@ class OrthographicCamera: Camera, Movable {
     
     var viewMatrix: float4x4 {
         let translationMatrix = float4x4(translation: self.transform.position)
-        let rotationMatrix = float4x4(rotation: self.transform.rotation).inverse
-        return translationMatrix * rotationMatrix
+        let rotationMatrix = float4x4(rotation: self.transform.rotation)
+        return (rotationMatrix * translationMatrix).inverse
     }
     
     init() {

@@ -25,7 +25,7 @@ class ArcballCamera: Camera {
     var viewMatrix: float4x4 {
         var viewMartix: float4x4
         if target == transform.position {
-            viewMartix = float4x4(translation: transform.position) * float4x4(rotationYXZ: transform.rotation).inverse
+            viewMartix = (float4x4(translation: transform.position) * float4x4(rotationYXZ: transform.rotation)).inverse
         } else {
             viewMartix = float4x4(eye: transform.position, center: target, up: [0,1,0])
         }
@@ -46,7 +46,7 @@ class ArcballCamera: Camera {
     
     func update(deltaTime: Float) {
         let input = InputController.shared
-        distance -= (Float(input.mouseScroll.x) + Float(input.mouseScroll.y)) * Movement.Settings.mouseScrollSensitivity
+        distance += (Float(input.mouseScroll.x) + Float(input.mouseScroll.y)) * Movement.Settings.mouseScrollSensitivity
         distance = min(maxDistance, max(minDistance, distance))
         input.mouseScroll = .zero
         

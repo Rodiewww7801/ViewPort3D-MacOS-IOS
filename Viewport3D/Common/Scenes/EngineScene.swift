@@ -24,6 +24,8 @@ class EngineScene {
         self.createGroundModel()
         
         setupCameraTransform(deltaTime: 0)
+        setupTransformForGroundModel()
+        setupTransformForAnimeModel()
     }
     
     func update(size: CGSize) {
@@ -32,15 +34,12 @@ class EngineScene {
     
     func update(deltaTime: Float) {
         camera.update(deltaTime: deltaTime)
-       
-        setupTransformForGroundModel()
-        setupTransformForAnimeModel()
     }
     
     private func setupCameraTransform(deltaTime: Float) {
         //fps camera
         self.camera.transform.rotation = [0, sin(deltaTime), 0]
-        self.camera.transform.position = [0, 1.5, -3]
+        self.camera.transform.position = [0, 2, -3]
         
 //        //acrabal camere
 //        self.camera.transform.rotation = [0, sin(deltaTime), 0]
@@ -49,8 +48,8 @@ class EngineScene {
 //        self.camera.target = [0, 1.2, 0]
         
 //        // otrtographic setup
-//        self.camera.transform.position = [0, -1.5, 0]
-//        self.camera.transform.rotation.x = .pi / 2
+//        self.camera.transform.position = [0, 0, -3]
+//        self.camera.transform.rotation = [0, 0, 0]
     }
     
     private func setupTransformForAnimeModel() {
